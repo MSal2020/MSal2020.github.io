@@ -1,0 +1,211 @@
+// import resorceses from node-modules
+import {
+  gsap,
+  ScrollTrigger,
+  Draggable,
+  MotionPathPlugin,
+  ScrollToPlugin,
+  TweenLite,
+  TweenMax,
+  CSSPlugin,
+  EasePack,
+  Expo,
+} from "../node_modules/gsap/all.js";
+
+import AOS from "../node_modules/aos/dist/aos.esm.js";
+
+// nav flexibility
+const nav = document.getElementById("nav");
+
+window.addEventListener("scroll", function () {
+  if (window.pageYOffset > 100) {
+    nav.classList.add("active");
+  } else {
+    nav.classList.remove("active");
+  }
+});
+
+// forward btn setting
+
+const forward_btn = document.getElementById("forward-btn");
+
+window.addEventListener("scroll", function () {
+  if (window.pageYOffset > 200) {
+    forward_btn.classList.add("active");
+  } else {
+    forward_btn.classList.remove("active");
+  }
+});
+
+// parallax effect in banner
+
+
+
+// smooth scroll
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+let container = document.querySelector("#scroll-container");
+
+let height;
+function setHeight() {
+  height = container.clientHeight;
+  document.body.style.height = height + "px";
+}
+ScrollTrigger.addEventListener("refreshInit", setHeight);
+
+// smooth scrolling container
+gsap.to(container, {
+  y: () => -(height - document.documentElement.clientHeight),
+  ease: "none",
+  scrollTrigger: {
+    trigger: document.body,
+    start: "top top",
+    end: "bottom bottom",
+    scrub: 1,
+    invalidateOnRefresh: true,
+  },
+});
+
+// nav btns initialize for smooth transition
+
+var btn_nav = document.querySelectorAll(".top-btn");
+
+function setupLinks(scroller) {
+  let linkElements = gsap.utils.toArray(btn_nav),
+    linkTargets = linkElements.map((e) =>
+      document.querySelector(e.getAttribute("href"))
+    ),
+    linkPositions = [],
+    calculatePositions = () => {
+      let offset = gsap.getProperty(scroller, "y");
+      linkTargets.forEach(
+        (e, i) => (linkPositions[i] = e.getBoundingClientRect().top - offset)
+      );
+    };
+
+  linkElements.forEach((element, i) => {
+    element.addEventListener("click", (e) => {
+      e.preventDefault();
+      gsap.to(window, {
+        scrollTo: linkPositions[i],
+        ease: "power4",
+        overwrite: true,
+      });
+    });
+  });
+
+  ScrollTrigger.addEventListener("refresh", calculatePositions);
+}
+
+setupLinks(container);
+
+// loading animation
+
+TweenLite.to(".loader-slide-2", 2, {
+  y: "-100%",
+  opacity: 0,
+  ease: Expo.easeInOut,
+});
+
+TweenLite.to(".loader-slide-1", 2, {
+  y: "-100%",
+  opacity: 0,
+  delay: 0.4,
+  ease: Expo.easeInOut,
+});
+
+TweenLite.to(".loader-animation", 1.2, {
+  opacity: 1,
+  ease: Expo.easeInOut,
+});
+
+TweenLite.from(".banner .banner-content h1", 1, {
+  opacity: 0,
+  x: -100,
+  delay: 0.8,
+  ease: Expo.ease,
+});
+
+TweenLite.from(".banner .banner-content p", 1, {
+  opacity: 0,
+  x: -100,
+  delay: 1.2,
+  ease: Expo.ease,
+});
+
+TweenLite.from(".banner .banner-content a", 1, {
+  opacity: 0,
+  x: -100,
+  delay: 1.6,
+  ease: Expo.ease,
+});
+
+TweenLite.from(".banner .banner-pic img", 1, {
+  opacity: 0,
+  delay: 2,
+  ease: Expo.ease,
+});
+
+// loader setting
+const loader_container = document.getElementById("loader");
+
+window.addEventListener("load", function () {
+  setTimeout(() => {
+    loader_container.classList.add("close");
+  }, 3000);
+  AOS.init();
+});
+
+// scroll animation
+gsap.utils.toArray(".revealUp").forEach(function (elem) {
+  ScrollTrigger.create({
+    trigger: elem,
+    start: "top 95%",
+    end: "bottom 5%",
+    // markers: true,
+    onEnter: function () {
+      gsap.fromTo(
+        elem,
+        { y: 100, autoAlpha: 0 },
+        {
+          duration: 1.25,
+          y: 0,
+          autoAlpha: 1,
+          ease: "back",
+          overwrite: "auto",
+        }
+      );
+    },
+    onLeave: function () {
+      gsap.fromTo(elem, { autoAlpha: 1 }, { autoAlpha: 0, overwrite: "auto" });
+    },
+    onEnterBack: function () {
+      gsap.fromTo(
+        elem,
+        { y: -100, autoAlpha: 0 },
+        {
+          duration: 1.25,
+          y: 0,
+          autoAlpha: 1,
+          ease: "back",
+          overwrite: "auto",
+        }
+      );
+    },
+    onLeaveBack: function () {
+      gsap.fromTo(elem, { autoAlpha: 1 }, { autoAlpha: 0, overwrite: "auto" });
+    },
+  });
+});
+
+// hamburger
+
+const hamb_btn = document.getElementById("hamb");
+const drop_down = document.getElementById("drop-down");
+
+hamb_btn.addEventListener("click", function () {
+  hamb_btn.classList.toggle("active");
+  drop_down.classList.toggle("active");
+});
+
+export default drop_down;
