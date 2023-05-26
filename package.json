@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "deploy": "gh-pages -d dist && node gh.js"
+    "deploy": "npm run start && node gh.js"
     
   },
   "repository": {
