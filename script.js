@@ -6,7 +6,7 @@ gsap.from('.logo div',{
     x:20
 } )
 
-const menu_items = document.querySelector('.menu-items')
+const menu_items = document.querySelector('.navigation__list')
 gsap.from(menu_items.children ,{
     opacity:0,
     x:0,
@@ -50,6 +50,37 @@ gsap.utils.toArray('.title').forEach(title=>{
         scrollTrigger:title
     })
 })
+//Make the list items appear one by one
+const list_items = document.querySelectorAll('.skill-li')
+list_items.forEach((item,index)=>{
+    gsap.fromTo(item,{
+        opacity:0,
+        y:300,
+        skewX:65
+    },{
+        opacity:1,
+        y:0,
+        skewX:0,
+        duration:1,
+        delay:.5 + index * .5,
+        scrollTrigger:item
+    })
+})
+gsap.utils.toArray('.course_list').forEach(course_list=>{
+    gsap.fromTo(course_list,{
+        opacity:0,
+        x:150,
+        skewX:30
+    },{
+        opacity:1,
+        x:0,
+        skewX:0,
+        duration:1,
+        delay:.5,
+        scrollTrigger:course_list
+
+    })
+})
 
 gsap.utils.toArray('p').forEach(p=>{
     gsap.fromTo(p,{
@@ -63,6 +94,96 @@ gsap.utils.toArray('p').forEach(p=>{
         duration:1,
         delay:.5,
         scrollTrigger:p
+
+    })
+})
+gsap.utils.toArray('h3').forEach(h3=>{
+    gsap.fromTo(h3,{
+        opacity:0,
+        y:150,
+        skewX:30
+    },{
+        opacity:1,
+        y:0,
+        skewX:0,
+        duration:1,
+        delay:.5,
+        scrollTrigger:h3
+
+    })
+})
+gsap.utils.toArray('span').forEach(span=>{
+    gsap.fromTo(span,{
+        opacity:0,
+        y:150,
+        skewX:30
+    },{
+        opacity:1,
+        y:0,
+        skewX:0,
+        duration:1,
+        delay:.5,
+        scrollTrigger:span
+
+    })
+})
+gsap.utils.toArray('h4').forEach(h4=>{
+    gsap.fromTo(h4,{
+        opacity:0,
+        x:150,
+        skewX:30
+    },{
+        opacity:1,
+        x:0,
+        skewX:0,
+        duration:1,
+        delay:.5,
+        scrollTrigger:h4
+
+    })
+})
+gsap.utils.toArray('.twitter').forEach(twitter=>{
+    gsap.fromTo(twitter,{
+        opacity:0,
+        x:150,
+        skewX:30
+    },{
+        opacity:0.5,
+        x:0,
+        skewX:0,
+        duration:1,
+        delay:.5,
+        scrollTrigger:twitter
+
+    })
+})
+gsap.utils.toArray('.instagram').forEach(instagram=>{
+    gsap.fromTo(instagram,{
+        opacity:0,
+        x:150,
+        skewX:30
+    },{
+        opacity:0.5,
+        x:0,
+        skewX:0,
+        duration:1,
+        delay:.5,
+        scrollTrigger:instagram
+
+    })
+})
+gsap.utils.toArray('small').forEach(small=>{
+    gsap.fromTo(small,{
+        opacity:0,
+        x:-150,
+        skewX:30
+    },{
+        opacity:1,
+        x:0,
+        skewX:0,
+        duration:1,
+        delay:.5,
+        scrollTrigger:small
 
     })
 })

@@ -7,18 +7,25 @@
     <title>Invest Company</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <nav class="nav-bar">
-            <div class="logo">
+        
+        <nav class="navigation" role="navigation" aria-label="Global">
+            <a class="navigation__link" href="./index.html">
+                Salmaan
                 <img class="star" src="./img/s.svg" alt="">
-            </div>
-            <ul class="menu-items">
-                <li><a href="#">about</a></li>
-                <li><a href="#">services</a></li>
-                <li><a href="#">news</a></li>
-                <li><a href="#">contact</a></li>
+            </a>
+            <button class="navigation__button" aria-expanded="false" aria-controls="navigation__list">Open Global Menu</button>
+            <ul class="navigation__list" id="navigation__list">
+                <li class="navigation__list__item">
+                    <a class="navigation__list__link" href="/#work">Work</a>
+                </li>
+                <li class="navigation__list__item">
+                    <a class="navigation__list__link" href="cv.html">Resume</a>
+                </li>
+                
             </ul>
         </nav>
     </header>  
@@ -151,70 +158,92 @@
         </div>
     </section>
 
-    <section class="footer-section">
-        <div class="container" style="padding-bottom:5rem;">
-            <img src="./img/star.png" alt="" class="star star-s5">
-            <div class="left-side">
-                <div class="title">
-                    <h1>stay up-to date</h1>
-                    <h2>With everything precious metals</h2>
-                </div>
-            </div>
-            <div class="right-side">
-                <p class="txt">
-                    Replenish <span>your portfolio</span>
-                    with gold and silver <span>to diversity</span>
-                    your investment portfolio.
-                </p>
-            </div>
+    <section class="work" id="work" tabindex="-1">
+        <div class="work--copy">
+            <h2>Recent work and experiments</h2>
         </div>
-
-        <div class="line"></div>
-
-        <div class="container sides">
-            <div class="left-side">
-                <div class="logo">
-                    <img src="./img/star.png" class="star" alt="">
-                    <div>Frost Inv.</div>
+        <div class="work--grid">
+            <article class="work--item work--item__full">
+                <h3>Apple</h3>
+                <span>2022 – Present</span>
+                <hr/>
+                <h4>Senior Front End Developer</h4>
+                <p>I collaborate closely with design teams to develop prototypes, tooling, and interactive web experiences in order to tell the story of the products and services that live on Apple.com.</p>
+            </article>
+            <article class="work--item work--item__green">
+                <div class="work--title">
+                    <figure class="sandbox"></figure>
+                    <h3>Sandbox</h3>
                 </div>
-
-                <p class="p">
-                    We are based in Los Angeles, USA.<br>
-                    our motto is -investing in knowledge <br>
-                    pays the best dividends.
-                </p>
-            </div>
-            <div class="right-side">
-                <ul class="menu">
-                    <li><a href="#">Resources</a></li>
-                    <li><a href="#">company</a></li>
-                    <li><a href="#">help</a></li>
-                    <li><a href="#">client</a></li>
-                    <li><a href="#">about</a></li>
-                    <li><a href="#">support</a></li>
-                    <li><a href="#">blog</a></li>
-                    <li><a href="#">services</a></li>
-                    <li><a href="#">jobs</a></li>
-                    <li><a href="#">docs</a></li>
-                    <li><a href="#">news</a></li>
-                    <li><a href="#">privacy policy</a></li>
-                </ul>
-            </div>
+                <span>2021</span>
+                <hr/>
+                <p>A minimal WebGL library and 3D engine created to learn the essentials of computer graphics concepts and to limit the need for larger 3D libraries.</p>
+                <a href="https://github.com/cherupil/Sandbox" target="_blank">
+                    View on GitHub
+                    <span class="visually-hidden">, Sandbox</span>
+                </a>
+            </article>
+            <article class="work--item work--item__blue">
+                <div class="work--title">
+                    <figure class="director"></figure>
+                    <h3>Director</h3>
+                </div>
+                <span>2021</span>
+                <hr/>
+                <p>A custom animation library created not only as a learning experience to further understand animation, but also to power future experiences without relying on third-party code.</p>
+                <a href="https://github.com/cherupil/Director" target="_blank">
+                    View on GitHub
+                    <span class="visually-hidden">, Director</span>
+                </a>
+            </article>
+            <article class="work--item work--item__full work--item__black">
+                <canvas id="anotherdei-background" aria-hidden="true">
+                </canvas>
+                <h3>anotherdei.com</h3>
+                <span>2021</span>
+                <hr/>
+                <p>I designed and developed the personal portfolio website for designer and illustrator Danielle Toledo, and was awarded the Honorable Mention and Mobile Excellence awards by AWWWARDS.</p>
+                <a href="https://www.anotherdei.com" target="_blank">Visit anotherdei.com</a>
+            </article>
+            <article class="work--item">
+                <h3>Centretek</h3>
+                <span>2019 – 2021</span>
+                <hr/>
+                <h4>Technology Manager, Frontend</h4>
+                <p>I developed the frontend for various hospitals and non-profit organizations. I also mentored juniors on the frontend team, and provided technical and problem solving assistance for the entire team.</p>
+            </article>
+            <article class="work--item">
+                <h3>Groove Commerce</h3>
+                <span>2015 – 2019</span>
+                <hr/>
+                <h4>Senior UI Developer</h4>
+                <p>I developed e-commerce and demand generation websites, scoped and implemented platform integrations and custom applications, and collaborated on design work for rebranding and unique frontend experiences.</p>
+            </article>
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="left-side">
-                <p> &copy; copyright 2022 . All rights reserved</p>
-            </div>
-            <div class="right-side center">
-                <p>Term and Conditions</p>
-            </div>
+    <footer aria-label="Footer">
+        <div class="footer__inner">
+            <small>&copy; 2023 Salmaan</small>
+            <ul class="footer__social">
+                <li>
+                    <a class="social-icon" href="https://www.twitter.com/cherupil/" target="_blank" rel="noopener noreferrer">
+<img src="img/twitter.svg" class="twitter">
+                         Twitter 
+                    </a>
+                </li>
+                <li>
+                    <a class="social-icon" href="https://www.instagram.com/cherupil/" target="_blank" rel="noopener noreferrer">
+<img src="img/instagram.svg" class="instagram">
+                         Instagram 
+                    </a>
+                </li>
+            </ul>
         </div>
     </footer>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js" ></script>
 <script src="./script.js"></script>
+<script src="./main.js"></script>
 </html>

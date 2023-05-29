@@ -31,13 +31,19 @@ body{
 .logo{
     display: flex;
     align-items: center;
-    font-size: 14px;
     font-weight: 600;
     color: #fff;
+    border-radius: 20px;
+    flex-shrink: 0;
+    font-size: 0;
+    height: 56px;
+    margin-right: 64px;
+    order: 1;
+    width: 91px
 }
 
-.logo .star{
-    width: 14px;
+.star{
+    width: px;
     object-fit: cover;
     margin-right: 4px;
 }
@@ -61,7 +67,6 @@ a{
 }
 
 a:hover{
-    text-decoration: underline;
     transform: scale(1.1);
 }
 
@@ -71,6 +76,7 @@ section{
 }
 
 .section-one{
+    margin-top: 100px;
     height: calc(100vh - 85px);
 }
 
