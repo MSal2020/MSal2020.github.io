@@ -1,12 +1,12 @@
 gsap.registerPlugin(ScrollTrigger)
-
+/*
 gsap.from('.logo div',{
     opacity:0,
     delay:1,
     x:20
 } )
-
-const menu_items = document.querySelector('.menu-items')
+*/
+const menu_items = document.querySelector('.navigation__list')
 gsap.from(menu_items.children ,{
     opacity:0,
     x:0,
