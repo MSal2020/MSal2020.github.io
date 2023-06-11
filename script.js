@@ -172,6 +172,128 @@ gsap.utils.toArray('.instagram').forEach(instagram=>{
 
     })
 })
+/*
+gsap.utils.toArray('.work--grid').forEach(work=>{
+    gsap.fromTo(work,{
+        opacity:0,
+        y:150,
+        skewX:30
+    },{
+        opacity:1,
+        y:0,
+        skewX:0,
+        duration:1,
+        delay:.5,
+        scrollTrigger:work
+
+    })
+})
+*/
+/*
+// Put all the children of the "work--grid" class in an array
+const work_items = document.querySelectorAll('.work--grid > *');
+
+
+// Count the number of children
+const count = work_items.length;
+
+// Loop through the children and set the initial state.
+// If i = 0, the matrix will be (1, 0, 0, 1, 0, 55.25).
+// If i = 1, the matrix will be (1, 0, 0, 1, 0, 82.25).
+// If i = 2, the matrix will be (1, 0, 0, 1, 0, 329).
+// If i = 3, the matrix will be (1, 0, 0, 1, 0, 64.25).
+// If i = 4, the matrix will be (1, 0, 0, 1, 0, 79.25).
+// If i = 5, the matrix will be (1, 0, 0, 1, 0, 317).
+
+for (let i = 0; i < count; i++) {
+    if (i  == 0) {
+        gsap.set(work_items[i], {
+            transform: `matrix(1, 0, 0, 1, 0, 55.25)`
+        });
+    }
+    if (i  == 1) {
+        gsap.set(work_items[i], {
+            transform: `matrix(1, 0, 0, 1, 0, 82.25)`
+        });
+    }
+    if (i  == 2) {
+        gsap.set(work_items[i], {
+            transform: `matrix(1, 0, 0, 1, 0, 329)`
+        });
+    }
+    if (i  == 3) {
+        gsap.set(work_items[i], {
+            transform: `matrix(1, 0, 0, 1, 0, 64.25)`
+        });
+    }
+    if (i  == 4) {
+        gsap.set(work_items[i], {
+            transform: `matrix(1, 0, 0, 1, 0, 79.25)`
+        });
+    }
+    if (i  == 5) {
+        gsap.set(work_items[i], {
+            transform: `matrix(1, 0, 0, 1, 0, 317)`
+        });
+    }
+
+ 
+
+}
+*/
+/*
+const canvas = document.getElementById('anotherdei-background');
+
+// Create a new Intersection Observer instance
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // The canvas is now visible in the viewport, make the children visible
+        for (let i = 3; i < count; i++) {
+          gsap.set(work_items[i], {
+            visibility: 'visible'
+          });
+        }
+      } else {
+        // The canvas is not visible in the viewport, hide the children
+        for (let i = 3; i < count; i++) {
+          gsap.set(work_items[i], {
+            visibility: 'hidden'
+          });
+        }
+      }
+    });
+  });
+  
+  // Start observing the canvas element
+  observer.observe(canvas);
+*/
+
+//the 4th, 5th and 6th child are hidden by a canvas element with id="anotherdei-background". As soon as the canvas enters the viewport, the canvas will be removed and the children will be visible.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 gsap.utils.toArray('small').forEach(small=>{
     gsap.fromTo(small,{
         opacity:0,

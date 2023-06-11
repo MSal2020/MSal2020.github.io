@@ -2336,8 +2336,8 @@ table {
 
 .work {
     background-color: #f9f9f9;
-    min-height: 100vh;
-    overflow: hidden;
+    min-height: 180vh;
+    
     padding: 128px 20px
 }
 
@@ -3083,6 +3083,8 @@ footer .footer__social .instagram,footer .footer__social .twitter {
     transition: opacity .2s cubic-bezier(.5,1,.5,1);
     width: 44px;
     will-change: opacity;
+    margin-top: 10px;
+    margin-left: 10px;
 
 }
 
