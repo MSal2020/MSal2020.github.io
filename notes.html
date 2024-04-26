@@ -1,4 +1,22 @@
-* {
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Salmaan | notes
+  </title>
+  <meta content="notes of Salmaan" name="description"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="#000000" name="theme-color"/>
+  <meta content="website" property="og:type"/>
+  <meta content="Salmaan | notes" property="og:title"/>
+  <meta content="notes of Salmaan" property="og:description"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Salmaan | notes" name="twitter:title"/>
+  <meta content="notes of Salmaan" name="twitter:description"/>
+  <style>
+   * {
     box-sizing: border-box
 }
 
@@ -69,14 +87,14 @@ table {
     src: url(4c25ad540087c6c91e1a512489228e10.woff2) format("woff2"),url(c47c98b0c378fb434f6a083c2fc54ca7.woff) format("woff")
 }
 
-.dimensions--copy,.error main,.navigation,.resume main,footer .footer__inner {
+.dimensions--copy,.error main,.navigation,.notes main,footer .footer__inner {
     margin: 0 auto;
     max-width: 1532px;
     padding: 0 84px
 }
 
 @media(max-width: 799px) {
-    .dimensions--copy,.error main,.navigation,.resume main,footer .footer__inner {
+    .dimensions--copy,.error main,.navigation,.notes main,footer .footer__inner {
         padding:0 20px
     }
 }
@@ -86,14 +104,10 @@ table {
     display: flex;
     left: 50%;
     position: absolute;
-    top: 24px;
+    top: 84px;
     transform: translateX(-50%);
     width: 100%;
-    z-index: 2;
-    justify-content: space-between;
-    padding: 2rem 5rem;
-
-    /* font-size: 18px; */
+    z-index: 2
 }
 
 @media(max-width: 799px) {
@@ -117,7 +131,7 @@ table {
     }
 }
 
-.error .navigation:before,.resume .navigation:before {
+.error .navigation:before,.notes .navigation:before {
     background-color: gray
 }
 
@@ -145,11 +159,11 @@ table {
     outline: none
 }
 
-.error .navigation__link svg g,.resume .navigation__link svg g {
+.error .navigation__link svg g,.notes .navigation__link svg g {
     fill: #000
 }
 
-.error .navigation__link:focus,.resume .navigation__link:focus {
+.error .navigation__link:focus,.notes .navigation__link:focus {
     box-shadow: 0 0 0 4px #f9f9f9,0 0 0 8px #000;
     outline: none
 }
@@ -226,11 +240,11 @@ table {
     }
 }
 
-.error .navigation__button:after,.error .navigation__button:before,.resume .navigation__button:after,.resume .navigation__button:before {
+.error .navigation__button:after,.error .navigation__button:before,.notes .navigation__button:after,.notes .navigation__button:before {
     background-color: #000
 }
 
-.error .navigation__button:focus,.resume .navigation__button:focus {
+.error .navigation__button:focus,.notes .navigation__button:focus {
     box-shadow: 0 0 0 4px #f9f9f9,0 0 0 8px #000;
     outline: none
 }
@@ -299,7 +313,7 @@ table {
 }
 
 @media(max-width: 799px) {
-    .error .navigation__list:before,.resume .navigation__list:before {
+    .error .navigation__list:before,.notes .navigation__list:before {
         background-color:#fff;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,.063),0 16px 32px 0 rgba(0,0,0,.031)
     }
@@ -375,7 +389,7 @@ table {
     font-family: Articulat CF,system-ui,sans-serif;
     padding: 14px 24px;
     text-decoration: none;
-    transition: background-color .2s cubic-bezier(.5,1,.5,1);
+    transition: background-color .2s cubic-bezier(.5,1,.5,1)
 }
 
 .navigation__list__link:focus,.navigation__list__link:hover {
@@ -393,22 +407,22 @@ table {
     outline: none
 }
 
-.error .navigation__list__link,.resume .navigation__list__link {
+.error .navigation__list__link,.notes .navigation__list__link {
     background-color: rgba(36,36,36,0);
     color: #000
 }
 
-.error .navigation__list__link:focus,.error .navigation__list__link:hover,.resume .navigation__list__link:focus,.resume .navigation__list__link:hover {
+.error .navigation__list__link:focus,.error .navigation__list__link:hover,.notes .navigation__list__link:focus,.notes .navigation__list__link:hover {
     background-color: rgba(36,36,36,.1)
 }
 
 @media(max-width: 799px) {
-    .error .navigation__list__link:focus,.error .navigation__list__link:hover,.resume .navigation__list__link:focus,.resume .navigation__list__link:hover {
+    .error .navigation__list__link:focus,.error .navigation__list__link:hover,.notes .navigation__list__link:focus,.notes .navigation__list__link:hover {
         background-color:transparent
     }
 }
 
-.error .navigation__list__link:focus,.resume .navigation__list__link:focus {
+.error .navigation__list__link:focus,.notes .navigation__list__link:focus {
     box-shadow: 0 0 0 4px #f9f9f9,0 0 0 8px #000;
     outline: none
 }
@@ -2336,8 +2350,8 @@ table {
 
 .work {
     background-color: #f9f9f9;
-    min-height: 180vh;
-    
+    min-height: 100vh;
+    overflow: hidden;
     padding: 128px 20px
 }
 
@@ -2591,7 +2605,7 @@ table {
     color: #1b1b1b
 }
 
-.resume main {
+.notes main {
     color: #242424;
     display: flex;
     flex-direction: column;
@@ -2601,7 +2615,7 @@ table {
 }
 
 @media(max-width: 799px) {
-    .resume main {
+    .notes main {
         margin-bottom:84px;
         margin-top: 108px;
         padding-left: 20px;
@@ -2609,13 +2623,13 @@ table {
     }
 }
 
-.resume--intro {
+.notes--intro {
     align-items: flex-start;
     display: flex;
     flex-direction: column
 }
 
-.resume--intro h1 {
+.notes--intro h1 {
     font-size: 48px;
     font-weight: 700;
     letter-spacing: -.5px;
@@ -2623,13 +2637,13 @@ table {
 }
 
 @media(max-width: 799px) {
-    .resume--intro h1 {
+    .notes--intro h1 {
         font-size:36px;
         margin-bottom: 8px
     }
 }
 
-.resume--intro a {
+.notes--intro a {
     color: #242424;
     font-size: 24px;
     font-weight: 500;
@@ -2639,12 +2653,12 @@ table {
 }
 
 @media(max-width: 799px) {
-    .resume--intro a {
+    .notes--intro a {
         font-size:18px
     }
 }
 
-.resume--intro a:before {
+.notes--intro a:before {
     background-color: rgba(36,36,36,.1);
     border-radius: 12px;
     content: "";
@@ -2661,19 +2675,19 @@ table {
     z-index: -1
 }
 
-.resume--intro a:focus:before,.resume--intro a:hover:before {
+.notes--intro a:focus:before,.notes--intro a:hover:before {
     opacity: 1
 }
 
-.resume--intro a:focus {
+.notes--intro a:focus {
     outline: none
 }
 
-.resume--intro a:focus:before {
+.notes--intro a:focus:before {
     box-shadow: 0 0 0 4px #f9f9f9,0 0 0 8px #000
 }
 
-.resume--intro p {
+.notes--intro p {
     font-size: 24px;
     font-weight: 400;
     line-height: 1.5;
@@ -2683,16 +2697,30 @@ table {
 }
 
 @media(max-width: 799px) {
-    .resume--intro p {
+    .notes--intro p {
         font-size:18px
     }
 }
 
-.resume--skills {
+.notes--skills {
     margin-bottom: 48px
 }
 
-.resume--skills h2 {
+.notes--skills h1 {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -.5px;
+    margin-bottom: 16px
+
+}
+@media(max-width: 799px) {
+    .notes--skills h1 {
+        font-size:36px;
+        margin-bottom: 8px
+    }
+}
+
+.notes--skills h2 {
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 4px;
@@ -2701,78 +2729,84 @@ table {
 }
 
 @media(max-width: 799px) {
-    .resume--skills h2 {
+    .notes--skills h2 {
         margin-bottom:18px
     }
 }
 
-.resume--skills .skill-groups {
+.notes--skills h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px
+}
+
+.notes--skills .skill-groups {
     border-top: 1px solid #c4c4c4;
     display: flex;
     padding-top: 48px
 }
 
 @media(max-width: 1199px) {
-    .resume--skills .skill-groups {
+    .notes--skills .skill-groups {
         flex-wrap:wrap
     }
 }
 
 @media(max-width: 799px) {
-    .resume--skills .skill-groups {
+    .notes--skills .skill-groups {
         padding-top:24px
     }
 }
 
-.resume--skills .skill-groups--item {
+.notes--skills .skill-groups--item {
     display: flex;
     flex-direction: column;
     width: 33.33333%
 }
 
 @media(max-width: 1199px) {
-    .resume--skills .skill-groups--item {
+    .notes--skills .skill-groups--item {
         width:50%
     }
 
-    .resume--skills .skill-groups--item:last-child {
+    .notes--skills .skill-groups--item:last-child {
         margin-top: 24px
     }
 }
 
 @media(max-width: 799px) {
-    .resume--skills .skill-groups--item {
+    .notes--skills .skill-groups--item {
         margin-top:24px;
         width: 100%
     }
 
-    .resume--skills .skill-groups--item:first-child {
+    .notes--skills .skill-groups--item:first-child {
         margin-top: 0
     }
 }
 
-.resume--skills .skill-groups h3 {
+.notes--skills .skill-groups h3 {
     font-size: 16px;
     font-weight: 600;
     line-height: 2
 }
 
-.resume--skills .skill-groups ul {
+.notes--skills .skill-groups ul {
     display: flex;
     flex-direction: column
 }
 
-.resume--skills .skill-groups ul li {
+.notes--skills .skill-groups ul li {
     font-size: 16px;
     font-weight: 400;
     line-height: 2
 }
 
-.resume--education {
+.notes--education {
     margin-bottom: 48px
 }
 
-.resume--education h2 {
+.notes--education h2 {
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 4px;
@@ -2781,85 +2815,85 @@ table {
 }
 
 @media(max-width: 799px) {
-    .resume--education h2 {
+    .notes--education h2 {
         margin-bottom:18px
     }
 }
 
-.resume--education .education-columns {
+.notes--education .education-columns {
     border-top: 1px solid #c4c4c4;
     display: flex;
     padding-top: 48px
 }
 
 @media(max-width: 1199px) {
-    .resume--education .education-columns {
+    .notes--education .education-columns {
         flex-direction:column
     }
 }
 
 @media(max-width: 799px) {
-    .resume--education .education-columns {
+    .notes--education .education-columns {
         padding-top:24px
     }
 }
 
-.resume--education .education-columns--item {
+.notes--education .education-columns--item {
     display: flex;
     flex-direction: column;
     width: 33.33333%
 }
 
 @media(max-width: 1199px) {
-    .resume--education .education-columns--item {
+    .notes--education .education-columns--item {
         width:100%
     }
 
-    .resume--education .education-columns--item:last-child {
+    .notes--education .education-columns--item:last-child {
         margin-top: 16px
     }
 }
 
-.resume--education .education-columns h3 {
+.notes--education .education-columns h3 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 4px
 }
 
-.resume--education .education-columns span {
+.notes--education .education-columns span {
     font-size: 16px;
     font-weight: 500
 }
 
 @media(max-width: 1199px) {
-    .resume--education .education-columns span {
+    .notes--education .education-columns span {
         margin-bottom:24px
     }
 }
 
-.resume--education .education-columns strong {
+.notes--education .education-columns strong {
     font-size: 16px;
     font-weight: 600
 }
 
-.resume--education .education-columns h4 {
+.notes--education .education-columns h4 {
     font-size: 16px;
     font-weight: 600;
     line-height: 2
 }
 
-.resume--education .education-columns ul {
+.notes--education .education-columns ul {
     display: flex;
     flex-direction: column
 }
 
-.resume--education .education-columns ul li {
+.notes--education .education-columns ul li {
     font-size: 16px;
     font-weight: 400;
     line-height: 2
 }
 
-.resume--work h2 {
+.notes--work h2 {
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 4px;
@@ -2868,17 +2902,17 @@ table {
 }
 
 @media(max-width: 799px) {
-    .resume--work h2 {
+    .notes--work h2 {
         margin-bottom:18px
     }
 }
 
-.resume--work .work-rows {
+.notes--work .work-rows {
     display: flex;
     flex-direction: column
 }
 
-.resume--work .work-rows--item {
+.notes--work .work-rows--item {
     border-top: 1px solid #c4c4c4;
     display: flex;
     margin-bottom: 48px;
@@ -2887,64 +2921,64 @@ table {
 }
 
 @media(max-width: 799px) {
-    .resume--work .work-rows--item {
+    .notes--work .work-rows--item {
         flex-wrap:wrap;
         margin-bottom: 24px;
         padding-top: 24px
     }
 }
 
-.resume--work .work-rows--title {
+.notes--work .work-rows--title {
     width: 33.33333%
 }
 
 @media(max-width: 1199px) {
-    .resume--work .work-rows--title {
+    .notes--work .work-rows--title {
         width:50%
     }
 }
 
 @media(max-width: 799px) {
-    .resume--work .work-rows--title {
+    .notes--work .work-rows--title {
         width:100%
     }
 }
 
-.resume--work .work-rows--description {
+.notes--work .work-rows--description {
     width: 66.66666%
 }
 
 @media(max-width: 1199px) {
-    .resume--work .work-rows--description {
+    .notes--work .work-rows--description {
         width:50%
     }
 }
 
 @media(max-width: 799px) {
-    .resume--work .work-rows--description {
+    .notes--work .work-rows--description {
         margin-top:16px;
         width: 100%
     }
 }
 
-.resume--work .work-rows h3 {
+.notes--work .work-rows h3 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 4px
 }
 
-.resume--work .work-rows span {
+.notes--work .work-rows span {
     font-size: 16px;
     font-weight: 500
 }
 
-.resume--work .work-rows h4 {
+.notes--work .work-rows h4 {
     font-size: 16px;
     font-weight: 600;
     line-height: 2
 }
 
-.resume--work .work-rows p {
+.notes--work .work-rows p {
     font-size: 16px;
     font-weight: 400;
     line-height: 1.5
@@ -3069,11 +3103,6 @@ footer .footer__social li {
 
 
 
-
-
-
-
-
 footer .footer__social .instagram,footer .footer__social .twitter {
     background-position: 50%;
     background-repeat: no-repeat;
@@ -3081,11 +3110,10 @@ footer .footer__social .instagram,footer .footer__social .twitter {
     height: 24px;
     opacity: .5;
     transition: opacity .2s cubic-bezier(.5,1,.5,1);
-    width: 44px;
+    width: 24px;
     will-change: opacity;
     margin-top: 10px;
     margin-left: 10px;
-
 }
 
 
@@ -3107,12 +3135,9 @@ footer .footer__social a:focus {
     outline: none
 }
 
-html {
-    -webkit-text-size-adjust: 100%;
-    background-color: #000
-}
 
-html.error,html.resume {
+
+html.error,html.notes {
     background-color: #f9f9f9
 }
 
@@ -3121,7 +3146,7 @@ body {
     overflow-x: hidden
 }
 
-body.error,body.resume {
+body.error,body.notes {
     background-color: #f9f9f9
 }
 
@@ -3142,3 +3167,292 @@ picture[data-lazy] {
 .js picture[data-lazy] {
     display: block
 }
+
+
+
+.menu-wrapper {
+  border-top: 1px solid #c4c4c4;
+  display: flex;
+  padding-top: 48px;
+    padding-bottom: 48px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  position: relative;
+}
+
+.menu-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.shading {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  height: calc(100% - 48px);
+  background-color: rgba(36, 36, 36, 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.menu {
+  display: inline-flex;
+  background-color: #f9f9f9;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu > li > a {
+  display: block;
+  text-decoration: none;
+  color: #242424;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 16px;
+  border-radius: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.menu > li > a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(36, 36, 36, 0.1);
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.menu > li > a:hover::before,
+.menu > li > a.active::before {
+  opacity: 1;
+}
+
+
+.note-item {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(36, 36, 36, 0.19);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+/* ... existing styles ... */
+
+.note-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-top: 15vh;
+  height: 90vh;
+  z-index: 100;
+  width: 98vw;
+  overflow: hidden;
+  margin-left: 1vw;
+  transform: translateY(1000px);
+  opacity: 0;
+  margin-right: 1vw;
+  background-color: rgba(224, 224, 224, 0.8);
+  border-radius: 40px 40px 0px 0px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.popup-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 70px 20px 50px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.popup-content h3 {
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+  
+}
+
+.popup-content p {
+  font-size: 22px;
+  margin-bottom: 15px;
+  padding: 10px;
+  line-height: 1.6;
+}
+
+.popup-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+.popup-image {
+  width: 200px;
+  height: 300px;
+  margin-top: 20px;
+}
+
+.popup-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.popup-close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+}
+
+.popup-close ion-icon {
+  filter: invert(.2);
+  font-size: 25px;
+}
+
+.popup-text {
+    text-align: left;
+  padding: 20px;
+}
+
+
+  </style>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+ </head>
+ <body class="notes">
+  <nav aria-label="Global" class="navigation" role="navigation">
+   <a class="navigation__link" href="./index.html">
+    Salmaan
+    <img alt="" class="star" src="./img/icons8-s-key.svg"/>
+   </a>
+   <button aria-controls="navigation__list" aria-expanded="false" class="navigation__button">
+    Open Global Menu
+   </button>
+   <ul class="navigation__list" id="navigation__list">
+    <li class="navigation__list__item">
+     <a class="navigation__list__link" href="/#work">
+        Articles
+     </a>
+    </li>
+    <li class="navigation__list__item">
+     <a class="navigation__list__link" href="notes.html">
+      Notes
+     </a>
+    </li>
+   </ul>
+  </nav>
+  <main class="content" data-template="notes" id="content">
+   <section class="notes--intro">
+    <h1>
+     Notes
+    </h1>
+    
+    
+    <p>
+    A collection of notes on books, articles, and other resources that I have found useful.
+    </p>
+   </section>
+  
+   <section class="notes--skills">
+    <h2>Notes</h2>
+    <!-- horizontal scrollable menu of categories. Users can use horizontal scroll to switch between them-->
+    <nav class="menu-wrapper menu-wrapper--special">
+        <ul class="menu">
+          <li><a href="#" data-category="all">All</a></li>
+          <li><a href="#" data-category="Writing">Writing</a></li>
+          <li><a href="#" data-category="Productivity">Productivity</a></li>
+          <li><a href="#" data-category="Personal Finance">Personal Finance</a></li>
+            <li><a href="#" data-category="Fitness">Fitness</a></li>
+            <li><a href="#" data-category="Nutrition">Nutrition</a></li>
+            <li><a href="#" data-category="Psychology">Psychology</a></li>
+            <li><a href="#" data-category="Philosophy">Philosophy</a></li>
+            <li><a href="#" data-category="Emerging Technologies">Emerging Technologies</a></li>
+            <li><a href="#" data-category="Investing">Investing</a></li>
+            <li><a href="#" data-category="History">History</a></li>
+            <li><a href="#" data-category="Biography">Biography</a></li>
+            <li><a href="#" data-category="Leadership">Leadership</a></li>
+            <li><a href="#" data-category="Physics">Non-Fiction</a></li>
+            <li><a href="#" data-category="Self-Help">Self-Help</a></li>
+            <li><a href="#" data-category="Management">Management</a></li>
+            <li><a href="#" data-category="Marketing">Marketing</a></li>
+            <li><a href="#" data-category="Design">Design</a></li>
+            <li><a href="#" data-category="Entreprenuership">Entreprenuership</a></li>
+            <li><a href="#" data-category="Artificial Intelligence">Artificial Intelligence</a></li>
+
+
+        </ul>
+      </nav>
+    
+      <div class="notes--skills__content">
+        <div id="notes"></div>
+      </div>
+    
+      <!-- Add the popup template -->
+      <div class="note-popup">
+        <div class="popup-close" onclick="closeNotePopup(this)">
+          <ion-icon name="close-outline"></ion-icon>
+        </div>
+        <div class="popup-content">
+          <h1></h1>
+          <h2></h2>
+          <div class="popup-text"></div>
+        </div>
+      </div>
+
+  </section>
+   
+  </main>
+  <footer aria-label="Footer">
+   <div class="footer__inner">
+    <small>
+     © 2023 Salmaan Nusrath
+    </small>
+    <ul class="footer__social">
+     <li>
+      <a class="social-icon" href="https://twitter.com/msaln03" rel="noopener noreferrer" target="_blank">
+       <img class="twitter" src="img/icons8-twitter.svg"/>
+       Twitter
+      </a>
+     </li>
+     <li>
+      <a class="social-icon" href="https://www.instagram.com/msaln03" rel="noopener noreferrer" target="_blank">
+       <img class="instagram" src="img/icons8-instagram.svg"/>
+       Instagram
+      </a>
+     </li>
+    </ul>
+   </div>
+  </footer>
+
+ </body>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js">
+ </script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js">
+ </script>
+ <script src="./script.js">
+ </script>
+</html>
