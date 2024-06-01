@@ -82,7 +82,7 @@ body.dark-mode {
   }
 
   body.dark-mode .note-popup {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.6);
   transition: color 0.5s ease;
 }
 
@@ -190,61 +190,6 @@ input:checked + .slider:before {
   pointer-events: none;
 }
 
-.blob {
-  border-radius: 100px;
-  filter: blur(60px);
-}
-
-.yellow {
-  background-color: var(--yellow);
-  position: absolute;
-  top: 20%;
-  left: 10%;
-  height: 200px;
-  width: 200px;
-  animation: yellow 8s infinite ease;
-}
-
-.green {
-  background-color: var(--green);
-  position: absolute;
-  top: 10%;
-  right: 20%;
-  height: 200px;
-  width: 250px;
-  animation: green 8s infinite ease;
-}
-
-.red {
-  background-color: var(--red);
-  position: absolute;
-  right: 10%;
-  top: 60%;
-  height: 250px;
-  width: 200px;
-  animation: red 8s infinite linear;
-}
-
-@keyframes yellow {
-  0% {top: 20%; left: 10%; transform: scale(1) rotate(0);}
-  33% {top: 25%; left: 15%; transform: scale(1.1) rotate(120deg);}
-  66% {top: 15%; left: 20%; transform: scale(0.9) rotate(240deg);}
-  100% {top: 20%; left: 10%; transform: scale(1) rotate(360deg);}
-}
-
-@keyframes green {
-  0% {top: 10%; right: 20%; transform: scale(1.2) rotate(0);}
-  33% {top: 15%; right: 15%; transform: scale(1.1) rotate(120deg);}
-  66% {top: 5%; right: 25%; transform: scale(0.95) rotate(240deg);}
-  100% {top: 10%; right: 20%; transform: scale(1.2) rotate(360deg);}
-}
-
-@keyframes red {
-  0% {top: 60%; right: 10%; transform: scale(1) rotate(0);}
-  33% {top: 55%; right: 20%; transform: scale(1.2) rotate(120deg);}
-  66% {top: 65%; right: 15%; transform: scale(0.85) rotate(240deg);}
-  100% {top: 60%; right: 10%; transform: scale(1) rotate(360deg);}
-}
 
 
 ol,ul {
@@ -3552,8 +3497,8 @@ body.dark-mode .footer__inner small {
   margin-right: 1vw;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 40px 40px 0px 0px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .popup-content {
