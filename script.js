@@ -135,6 +135,36 @@ gsap.utils.toArray('h3').forEach(h3 => {
   });
 });
 
+gsap.fromTo('.notes--intro h1', {
+  opacity: 0,
+  y: 150,
+  skewX: 30
+}, {
+  opacity: 1,
+  y: 0,
+  skewX: 0,
+  duration: 1,
+  delay: .25,
+  scrollTrigger: '.notes--intro h1'
+});
+
+gsap.fromTo('.skill h2', {
+  opacity: 0,
+  y: 150,
+  skewX: 30
+}, {
+  opacity: 1,
+  y: 0,
+  skewX: 0,
+  duration: 1,
+  delay: .25,
+  scrollTrigger: '.skill h2'
+});
+
+
+
+
+
 gsap.utils.toArray('span').forEach(span => {
   gsap.fromTo(span, {
     opacity: 0,
