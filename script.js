@@ -74,41 +74,10 @@ gsap.utils.toArray('.title').forEach(title => {
   });
 });
 
-const list_items = document.querySelectorAll('.skill-li');
-list_items.forEach((item, index) => {
-  gsap.fromTo(item, {
-    opacity: 0,
-    y: 300,
-    skewX: 65
-  }, {
-    opacity: 1,
-    y: 0,
-    skewX: 0,
-    duration: 1,
-    delay: .25 + index * .25,
-    scrollTrigger: item
-  });
-});
-
-gsap.utils.toArray('.course_list').forEach(course_list => {
-  gsap.fromTo(course_list, {
-    opacity: 0,
-    x: 150,
-    skewX: 30
-  }, {
-    opacity: 1,
-    x: 0,
-    skewX: 0,
-    duration: 1,
-    delay: .25,
-    scrollTrigger: course_list
-  });
-});
-
 gsap.utils.toArray('p').forEach(p => {
   gsap.fromTo(p, {
     opacity: 0,
-    x: 150,
+    x: -150,
     skewX: 30
   }, {
     opacity: 1,
@@ -123,11 +92,11 @@ gsap.utils.toArray('p').forEach(p => {
 gsap.utils.toArray('h3').forEach(h3 => {
   gsap.fromTo(h3, {
     opacity: 0,
-    y: 150,
+    x: -150,
     skewX: 30
   }, {
-    opacity: 1,
-    y: 0,
+    opacity: 1, 
+    x: 0,
     skewX: 0,
     duration: 1,
     delay: .25,
@@ -135,55 +104,10 @@ gsap.utils.toArray('h3').forEach(h3 => {
   });
 });
 
-gsap.fromTo('.notes--intro h1', {
-  opacity: 0,
-  y: 150,
-  skewX: 30
-}, {
-  opacity: 1,
-  y: 0,
-  skewX: 0,
-  duration: 1,
-  delay: .25,
-  scrollTrigger: '.notes--intro h1'
-});
-
-gsap.fromTo('.skill h2', {
-  opacity: 0,
-  y: 150,
-  skewX: 30
-}, {
-  opacity: 1,
-  y: 0,
-  skewX: 0,
-  duration: 1,
-  delay: .25,
-  scrollTrigger: '.skill h2'
-});
-
-
-
-
-
-gsap.utils.toArray('span').forEach(span => {
-  gsap.fromTo(span, {
-    opacity: 0,
-    y: 150,
-    skewX: 30
-  }, {
-    opacity: 1,
-    y: 0,
-    skewX: 0,
-    duration: 1,
-    delay: .25,
-    scrollTrigger: span
-  });
-});
-
 gsap.utils.toArray('h4').forEach(h4 => {
   gsap.fromTo(h4, {
     opacity: 0,
-    x: 150,
+    x: -150,
     skewX: 30
   }, {
     opacity: 1,
@@ -195,33 +119,78 @@ gsap.utils.toArray('h4').forEach(h4 => {
   });
 });
 
-gsap.utils.toArray('.twitter').forEach(twitter => {
-  gsap.fromTo(twitter, {
+gsap.utils.toArray('h2:not(.popup-content h2)').forEach(h2 => {
+  gsap.fromTo(h2, {
     opacity: 0,
-    x: 150,
+    x: -150,
     skewX: 30
   }, {
-    opacity: 0.5,
+    opacity: 1,
     x: 0,
     skewX: 0,
     duration: 1,
     delay: .25,
-    scrollTrigger: twitter
+    scrollTrigger: h2
   });
 });
 
-gsap.utils.toArray('.instagram').forEach(instagram => {
-  gsap.fromTo(instagram, {
+gsap.utils.toArray('h1:not(.popup-content h1)').forEach(h1 => {
+  gsap.fromTo(h1, {
     opacity: 0,
-    x: 150,
+    x: -150,
     skewX: 30
   }, {
-    opacity: 0.5,
+    opacity: 1,
     x: 0,
     skewX: 0,
     duration: 1,
     delay: .25,
-    scrollTrigger: instagram
+    scrollTrigger: h1
+  });
+});
+
+gsap.utils.toArray('ul:not(.menu)').forEach(ul => {
+  gsap.fromTo(ul, {
+    opacity: 0,
+    x: -150,
+    skewX: 30
+  }, {
+    opacity: 1,
+    x: 0,
+    skewX: 0,
+    duration: 1,
+    delay: .25,
+    scrollTrigger: ul
+  });
+});
+
+gsap.utils.toArray('ul:not(.menu) li').forEach(li => {
+  gsap.fromTo(li, {
+    opacity: 0,
+    x: -150,
+    skewX: 30
+  }, {
+    opacity: 1,
+    x: 0,
+    skewX: 0,
+    duration: 1,
+    delay: .25,
+    scrollTrigger: li
+  });
+});
+
+gsap.utils.toArray('a').forEach(a => {
+  gsap.fromTo(a, {
+    opacity: 0,
+    x: -150,
+    skewX: 30
+  }, {
+    opacity: 1,
+    x: 0,
+    skewX: 0,
+    duration: 1,
+    delay: .25,
+    scrollTrigger: a
   });
 });
 
@@ -240,78 +209,23 @@ gsap.utils.toArray('small').forEach(small => {
   });
 });
 
-gsap.utils.toArray('button').forEach(button => {
-  gsap.fromTo(button, {
-    opacity: 0,
-  }, {
-    opacity: 1,
-    duration: 1,
-    delay: 0.5,
-    scrollTrigger: button
-  });
-});
 
-gsap.from('.pyramid', {
-  opacity: 0,
-  scale: .5,
-  duration: 1,
-  delay: .25
-});
 
-gsap.fromTo('.hand', {
-  scale: .2,
-  opacity: 0,
-  skewY: 30
-}, {
-  scale: 1,
-  opacity: 1,
-  skewY: 0,
-  duration: 1,
-  delay: .25,
-  scrollTrigger: '.hand'
-});
+  
 
-gsap.utils.toArray('.line').forEach(line => {
-  gsap.fromTo(line, {
-    opacity: 0,
-    width: '0%'
-  }, {
-    opacity: 1,
-    width: '100%',
-    duration: 1,
-    delay: 0.5,
-    scrollTrigger: line
-  });
-});
 
-gsap.utils.toArray('.rotation').forEach(rotate => {
-  gsap.fromTo(rotate, {
-    opacity: 0,
-    rotation: 350,
-    scale: .2
-  }, {
-    opacity: 1,
-    rotation: 0,
-    scale: 1,
-    duration: 1,
-    delay: 0.5,
-    scrollTrigger: rotate
-  });
-});
 
-gsap.fromTo('.card', {
-  opacity: 0,
-  scale: .1,
-}, {
-  opacity: 1,
-  scale: 1,
-  duration: 1,
-  delay: .25,
-  stagger: {
-    amount: 1
-  },
-  scrollTrigger: '.card'
-});
+
+
+
+
+
+
+
+
+
+
+
 
 const menu = document.querySelector('.menu');
 
@@ -630,7 +544,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (currentTheme === 'dark-mode') {
       toggleSwitch.checked = true;
-      metaThemeColor.setAttribute('content', '#000000'); // Dark mode color
+      metaThemeColor.setAttribute('content', '#8B4513'); // Dark mode color
     }
   }
 
@@ -638,7 +552,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (e.target.checked) {
       document.body.classList.add('dark-mode');
       localStorage.setItem('theme', 'dark-mode');
-      metaThemeColor.setAttribute('content', '#000000'); // Dark mode color
+      metaThemeColor.setAttribute('content', '#8B4513'); // Dark mode color
     } else {
       document.body.classList.remove('dark-mode');
       localStorage.setItem('theme', 'light-mode');
