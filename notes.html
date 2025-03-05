@@ -30,6 +30,281 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
     vertical-align: baseline
 }
 
+/* Search Styles */
+.search-container {
+  position: relative;
+  width: 100%;
+  margin: 0 0 25px;
+}
+
+#search-input {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  font-family: "Articulat CF", sans-serif;
+  color: #7A5E3E;
+}
+
+body.dark-mode #search-input {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #D1B68D;
+}
+
+#search-input:focus {
+  outline: none;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+body.dark-mode #search-input:focus {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.search-results {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+body.dark-mode .search-results {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.search-results.active {
+  max-height: 400px;
+  opacity: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.search-results::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-results::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+body.dark-mode .search-results::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.search-history-header {
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #7A5E3E;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .search-history-header {
+  color: #D1B68D;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.search-result-item {
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: flex-start;
+}
+
+body.dark-mode .search-result-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+body.dark-mode .search-result-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-result-item.selected {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+body.dark-mode .search-result-item.selected {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.search-result-item.search-history-item .search-result-main {
+  padding-right: 0;
+}
+
+.search-result-main {
+  flex: 1;
+  min-width: 0; /* Allows flex item to shrink below content size */
+}
+
+.search-result-stats {
+  display: none;
+  flex-shrink: 0;
+  width: 120px;
+  padding-left: 15px;
+  margin-left: 15px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  text-align: right;
+}
+
+body.dark-mode .search-result-stats {
+    border-left-color: rgba(209, 182, 141, 0.4);
+}
+
+.reading-time {
+  margin-bottom: 5px;
+  color: #7A5E3E;
+  font-weight: 500;
+}
+
+body.dark-mode .reading-time {
+  color: #D1B68D;
+}
+
+.relevance-indicator {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.relevance-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-left: 4px;
+  background-color: rgba(122, 94, 62, 0.2);
+}
+
+body.dark-mode .relevance-dot {
+  background-color: rgba(209, 182, 141, 0.2);
+}
+
+.relevance-dot.filled {
+  background-color: #7A5E3E;
+}
+
+body.dark-mode .relevance-dot.filled {
+  background-color: #D1B68D;
+}
+
+.note-icon {
+  margin-bottom: 5px;
+  height: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.note-icon svg {
+  width: auto;
+  height: 24px;
+}
+
+.key-points {
+  color: #7A5E3E;
+  font-weight: 500;
+}
+
+body.dark-mode .key-points {
+  color: #D1B68D;
+}
+
+@media (min-width: 768px) {
+  .search-result-stats {
+    display: block;
+  }
+}
+
+.search-result-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #7A5E3E;
+}
+
+body.dark-mode .search-result-title {
+  color: #D1B68D;
+}
+
+.search-result-category {
+  display: inline-block;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+}
+
+body.dark-mode .search-result-category {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #E6E6E6;
+}
+
+.search-result-preview {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+body.dark-mode .search-result-preview {
+  color: #E6E6E6;
+}
+
+.search-highlight {
+  font-weight: bold;
+  color: #7A5E3E;
+  background-color: rgba(122, 94, 62, 0.2); /* Increase from 0.1 to 0.2 */
+  padding: 0 3px; /* Increase from 2px to 3px */
+  border-radius: 3px;
+  box-shadow: 0 0 2px rgba(122, 94, 62, 0.3); /* Add subtle glow */
+}
+
+body.dark-mode .search-highlight {
+  color: #D1B68D;
+  background-color: rgba(209, 182, 141, 0.2); /* Increase from 0.1 to 0.2 */
+  box-shadow: 0 0 2px rgba(209, 182, 141, 0.3); /* Add subtle glow */
+}
+
+.search-no-results {
+  padding: 20px;
+  text-align: center;
+  color: #7A5E3E;
+}
+
+body.dark-mode .search-no-results {
+  color: #D1B68D;
+}
+
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
     display: block
 }
@@ -3719,14 +3994,18 @@ body.dark-mode .footer__inner small {
   
    <section class="notes--skills">
     <h2 >Notes</h2>
+    <!-- Search bar -->
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search notes..." />
+      <div id="search-results" class="search-results"></div>
+    </div>
+    
     <!-- horizontal scrollable menu of categories. Users can use horizontal scroll to switch between them-->
     <nav class="menu-wrapper menu-wrapper--special">
         <ul class="menu">
           <li><a href="#" data-category="all">All</a></li>
           <li><a href="#" data-category="Productivity">Productivity</a></li>
-            <li><a href="#" data-category="Entrepreneurship">Entrepreneurship</a></li>
-
-
+          <li><a href="#" data-category="Entrepreneurship">Entrepreneurship</a></li>
         </ul>
       </nav>
     
