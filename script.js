@@ -31,6 +31,7 @@ items.forEach((item) => {
   });
 });
 
+// Initial load animations
 const menu_items = document.querySelector('.navigation__list');
 gsap.from(menu_items.children, {
   opacity: 0,
@@ -39,6 +40,24 @@ gsap.from(menu_items.children, {
   delay: 1.5,
   stagger: {
     amount: 1
+  }
+});
+
+// Search bar entrance animation with improved handling
+gsap.fromTo(".search-container", {
+  opacity: 0,
+  y: 15,
+  pointerEvents: "none"
+}, {
+  opacity: 1,
+  y: 0,
+  pointerEvents: "auto",
+  duration: 0.8,
+  delay: 0.7,
+  ease: "power2.out",
+  onStart: function() {
+    // Ensure the container has proper z-index during animation
+    gsap.set(".search-container", {zIndex: 1000});
   }
 });
 
@@ -313,6 +332,29 @@ const categoryOrder = [
   "Artificial Intelligence"
 ];
 
+function positionCategoryIndicator(categoryLink, animate = true) {
+  const indicator = document.querySelector('.category-indicator');
+  const linkRect = categoryLink.getBoundingClientRect();
+  const menuRect = document.querySelector('.menu-wrapper').getBoundingClientRect();
+  
+  // Calculate position relative to the menu wrapper
+  const left = linkRect.left - menuRect.left + document.querySelector('.menu-wrapper').scrollLeft;
+  
+  // Set indicator width and position
+  if (animate) {
+    gsap.to(indicator, {
+      duration: 0.4,
+      width: linkRect.width,
+      x: left,
+      ease: "power2.out"
+    });
+  } else {
+    // Initial positioning without animation
+    indicator.style.width = `${linkRect.width}px`;
+    indicator.style.transform = `translateX(${left}px)`;
+  }
+}
+
 function filterNotesByCategory(category) {
   const currentCategory = document.querySelector(".menu a.active");
   const currentNotes = document.querySelectorAll(".note-item");
@@ -328,6 +370,9 @@ function filterNotesByCategory(category) {
   const notesContainer = document.getElementById("notes");
   const notesContainerRect = notesContainer.getBoundingClientRect();
   const screenWidth = window.innerWidth;
+
+  // Animate the category indicator
+  positionCategoryIndicator(selectedLink);
 
   gsap.to(currentNotes, {
     duration: 0.5,
@@ -354,8 +399,6 @@ function filterNotesByCategory(category) {
 
   // Add active class to the selected category link
   selectedLink.classList.add("active");
-
-  
 }
   
   const categoryLinks = document.querySelectorAll(".menu a");
@@ -363,6 +406,25 @@ function filterNotesByCategory(category) {
     link.addEventListener("click", event => {
       event.preventDefault();
       const category = event.target.getAttribute("data-category");
+      
+      // Ensure the clicked category is visible (scroll into view if needed)
+      const menuWrapper = document.querySelector('.menu-wrapper');
+      const linkRect = link.getBoundingClientRect();
+      const menuRect = menuWrapper.getBoundingClientRect();
+      
+      // Check if link is not fully visible
+      if (linkRect.left < menuRect.left || linkRect.right > menuRect.right) {
+        // Calculate scroll position to center the link
+        const scrollLeft = linkRect.left + menuWrapper.scrollLeft - menuRect.left - (menuRect.width / 2) + (linkRect.width / 2);
+        
+        // Smooth scroll to the link
+        gsap.to(menuWrapper, {
+          scrollLeft: scrollLeft,
+          duration: 0.4,
+          ease: "power2.out"
+        });
+      }
+      
       filterNotesByCategory(category);
     });
   });
@@ -891,6 +953,27 @@ function initSearch() {
 document.addEventListener("DOMContentLoaded", function() {
   const allCategoryLink = document.querySelector('.menu a[data-category="all"]');
   allCategoryLink.classList.add("active");
+  
+  // Initialize category indicator without animation
+  positionCategoryIndicator(allCategoryLink, false);
+  
+  // Handle window resize and menu scroll to reposition category indicator
+  window.addEventListener('resize', () => {
+    const activeLink = document.querySelector('.menu a.active');
+    if (activeLink) {
+      positionCategoryIndicator(activeLink, false);
+    }
+  });
+  
+  // Update indicator position when scrolling the menu
+  const menuWrapper = document.querySelector('.menu-wrapper');
+  menuWrapper.addEventListener('scroll', () => {
+    const activeLink = document.querySelector('.menu a.active');
+    if (activeLink) {
+      positionCategoryIndicator(activeLink, false);
+    }
+  });
+  
   filterNotesByCategory("all");
   
   // Initialize search functionality
