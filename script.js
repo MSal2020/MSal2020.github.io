@@ -513,11 +513,7 @@ function filterNotesByCategory(category) {
     const popup = document.querySelector('.note-popup');
     popup.addEventListener('wheel', handlePopupScroll);
 
-    // Hide the search container when popup is open
-    const searchContainer = document.querySelector('.search-container');
-    if (searchContainer) {
-      searchContainer.style.display = 'none';
-    }
+
   
     document.body.style.overflow = 'hidden'; // Prevent page scrolling
   
@@ -534,11 +530,7 @@ function closeNotePopup(closeButton) {
 
   popup.removeEventListener('wheel', handlePopupScroll);
 
-  // Show the search container again when popup is closed
-  const searchContainer = document.querySelector('.search-container');
-  if (searchContainer) {
-    searchContainer.style.display = '';
-  }
+
   
   notePop.reverse();
 
