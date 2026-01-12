@@ -16,6 +16,29 @@
   <meta content="summary_large_image" name="twitter:card"/>
   <meta content="Salmaan | notes" name="twitter:title"/>
   <meta content="notes of Salmaan" name="twitter:description"/>
+  
+  <!-- Prevent FOUC (Flash of Unstyled Content) for dark mode and page transitions -->
+  <script>
+    (function() {
+      // Apply dark mode immediately to prevent flash
+      var theme = localStorage.getItem('theme');
+      if (!theme) {
+        var oldDarkMode = localStorage.getItem('darkMode');
+        if (oldDarkMode === 'true') theme = 'dark-mode';
+      }
+      if (theme === 'dark-mode') {
+        document.documentElement.classList.add('dark-mode');
+      }
+      
+      // If coming from page transition, inject CSS to hide loader immediately
+      if (sessionStorage.getItem('pageTransitioning') === 'true') {
+        var style = document.createElement('style');
+        style.textContent = '.page-loader { display: none !important; }';
+        document.head.appendChild(style);
+      }
+    })();
+  </script>
+  
   <style>
    * {
     box-sizing: border-box
@@ -35,6 +58,15 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
   position: relative;
   width: 100%;
   margin: 0 0 25px;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Hide search container when note popup is active */
+body.note-popup-active .search-container {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -1;
 }
 
 #search-input {
@@ -318,18 +350,34 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
 }
 
 
+html {
+  scroll-behavior: smooth;
+  background: linear-gradient(300deg, #F0DBA5, #FFE7C7, #D5B897);
+  background-size: 180% 180%;
+  background-attachment: fixed;
+  min-height: 100%;
+}
+
 body {
   line-height: 1;
   background: linear-gradient(300deg, #F0DBA5, #FFE7C7, #D5B897);
   background-size: 180% 180%;
+  background-attachment: fixed;
   font-family: "Recoleta", sans-serif;
   transition: color 0.5s ease;
-
+  min-height: 100%;
 }
 
+/* Apply dark mode from html element to prevent flash */
+html.dark-mode {
+    background: linear-gradient(300deg, #000000, #1C1C1C, #4A2F1E);
+    background-attachment: fixed;
+  }
+
+html.dark-mode body,
 body.dark-mode {
     background: linear-gradient(300deg, #000000, #1C1C1C, #4A2F1E);
-    transition: color 0.5s ease;
+    background-attachment: fixed;
   }
 
   p, ul, ol {
@@ -342,8 +390,30 @@ body.dark-mode {
     transition: color 0.5s ease;
   }
 
-  h1, h2, h3, h4 {
+  /* Enhanced Typography Hierarchy */
+  h1 {
     color: #7A5E3E;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    transition: color 0.5s ease;
+  }
+
+  h2 {
+    color: #7A5E3E;
+    font-weight: 700;
+    letter-spacing: 2px;
+    transition: color 0.5s ease;
+  }
+
+  h3 {
+    color: #7A5E3E;
+    font-weight: 700;
+    transition: color 0.5s ease;
+  }
+
+  h4 {
+    color: #7A5E3E;
+    font-weight: 600;
     transition: color 0.5s ease;
   }
 
@@ -362,11 +432,9 @@ body.dark-mode {
 
 body.dark-mode .note-item {
   background-color: rgba(0, 0, 0, 0.3);
-  transition: color 0.5s ease;
 }
 body.dark-mode .note-item:hover {
   background-color: rgba(0, 0, 0, 0.6);
-  transition: color 0.5s ease;
 }
 
 body.dark-mode .popup-close ion-icon {
@@ -404,7 +472,7 @@ body.dark-mode .blob {
   right: 0;
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.5);
-  transition: 0.4s;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   border-radius: 34px;
   display: flex;
   align-items: center;
@@ -412,8 +480,17 @@ body.dark-mode .blob {
   padding: 0 5px;
 }
 
+.slider:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 body.dark-mode .slider {
   background-color: rgba(0, 0, 0, 0.9);
+}
+
+body.dark-mode .slider:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 .slider:before {
@@ -424,12 +501,17 @@ body.dark-mode .slider {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  transition: 0.4s;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 input:checked + .slider:before {
   transform: translateX(26px);
+}
+
+.slider:active:before {
+  transform: scale(0.95);
 }
 
 .light-icon,
@@ -579,7 +661,22 @@ body.dark-mode .navigation::before {
     height: 56px;
     margin-right: 64px;
     order: 1;
-    width: 91px
+    width: 91px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: inline-block;
+}
+
+/* Logo hover micro-interaction */
+.navigation__link:hover {
+    transform: scale(1.05) rotate(3deg);
+}
+
+.navigation__link img {
+    transition: filter 0.3s ease;
+}
+
+.navigation__link:hover img {
+    filter: brightness(1.1) drop-shadow(0 4px 8px rgba(237, 183, 77, 0.3));
 }
 
 @media(max-width: 799px) {
@@ -618,6 +715,7 @@ body.dark-mode .menu > li > a {
 .navigation__button {
     -webkit-tap-highlight-color: transparent;
     -webkit-appearance: none;
+    appearance: none;
     background: none;
     border: none;
     border-radius: 8px;
@@ -837,12 +935,16 @@ body.dark-mode .menu > li > a {
     font-family: Articulat CF,system-ui,sans-serif;
     padding: 14px 24px;
     text-decoration: none;
-    transition: background-color .2s cubic-bezier(.5,1,.5,1)
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    font-weight: 500;
 }
 
+/* Micro-interaction: lift and background change */
 .navigation__list__link:focus,
 .navigation__list__link:hover {
   background-color: rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 @media(max-width: 799px) {
@@ -3097,6 +3199,25 @@ body.dark-mode .navigation__list__link:hover {
     margin-bottom: 16px
 }
 
+#typewriter-text::after {
+    content: '|';
+    animation: blink 1s infinite;
+    color: #7A5E3E;
+}
+
+body.dark-mode #typewriter-text::after {
+    color: #D1B68D;
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
 @media(max-width: 799px) {
     .notes--intro h1 {
         font-size:36px;
@@ -3578,11 +3699,18 @@ footer .footer__social .instagram,footer .footer__social .twitter {
     background-size: 18px 18px;
     height: 24px;
     opacity: .5;
-    transition: opacity .2s cubic-bezier(.5,1,.5,1);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     width: 24px;
-    will-change: opacity;
+    will-change: opacity, transform;
     margin-top: 10px;
     margin-left: 10px;
+}
+
+/* Micro-interaction: social icon bounce */
+footer .footer__social a:hover .instagram,
+footer .footer__social a:hover .twitter {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.1);
 }
 
 
@@ -3662,7 +3790,7 @@ picture[data-lazy] {
   border-radius: 12px;
   z-index: 0;
   pointer-events: none;
-  transition: transform 0.3s ease;
+  transition: none;
 }
 
 body.dark-mode .category-indicator {
@@ -3699,6 +3827,7 @@ body.dark-mode .menu-wrapper {
   border-radius: 12px;
   position: relative;
   z-index: 1;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .menu > li > a::before {
@@ -3714,13 +3843,15 @@ body.dark-mode .menu-wrapper {
   z-index: -1;
 }
 
-/* We're now using the category-indicator div instead of these pseudo-elements */
+/* Micro-interaction: lift effect on category links */
 .menu > li > a:hover {
   color: #000;
+  transform: translateY(-2px);
 }
 
 body.dark-mode .menu > li > a:hover {
   color: #fff;
+  transform: translateY(-2px);
 }
 
 body.dark-mode .navigation__link img.star {
@@ -3740,6 +3871,58 @@ body.dark-mode .footer__inner small {
   transition: color 0.5s ease;
 }
 
+/* ========== STICKY NAVIGATION - LIQUID GLASS EFFECT ========== */
+.navigation {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navigation.sticky {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 40px);
+  padding: 16px 32px;
+  border-radius: 20px;
+  z-index: 1000;
+
+  /* Glassmorphism - matching note items */
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.navigation.sticky::after {
+  display: none;
+}
+
+.navigation.sticky::before {
+  display: none;
+}
+
+.navigation.sticky > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Dark mode */
+body.dark-mode .navigation.sticky {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 799px) {
+  .navigation.sticky {
+    top: 10px;
+    max-width: calc(100% - 20px);
+    padding: 12px 20px;
+    border-radius: 16px;
+  }
+}
 
 .note-item {
   position: relative;
@@ -3755,12 +3938,13 @@ body.dark-mode .footer__inner small {
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* Micro-interaction: note item lift and glow */
 .note-item:hover {
-    background-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 /* ... existing styles ... */
@@ -3771,7 +3955,7 @@ body.dark-mode .footer__inner small {
   left: 0;
   margin-top: 5vh;
   height: 95vh;
-  z-index: 100;
+  z-index: 10000;
   width: 98vw;
   overflow: hidden;
   margin-left: 1vw;
@@ -3933,15 +4117,87 @@ body.dark-mode .footer__inner small {
     border-radius: 40px;
   }
 
- 
+/* ========== PAGE LOADING ANIMATION ========== */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(300deg, #F0DBA5, #FFE7C7, #D5B897);
+  background-size: 180% 180%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
 
+body.dark-mode .page-loader {
+  background: linear-gradient(300deg, #000000, #1C1C1C, #4A2F1E);
+}
 
+.page-loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
-  
+/* ========== PAGE TRANSITIONS ========== */
+.page-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(300deg, #F0DBA5, #FFE7C7, #D5B897);
+  background-size: 180% 180%;
+  z-index: 99998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  pointer-events: none;
+}
 
+html.dark-mode .page-transition-overlay,
+body.dark-mode .page-transition-overlay {
+  background: linear-gradient(300deg, #000000, #1C1C1C, #4A2F1E);
+}
 
+body.page-transitioning .page-transition-overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
 
-  
+.loader-content {
+  text-align: center;
+}
+
+.loader-logo {
+  width: 80px;
+  height: 80px;
+  animation: loaderPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loaderPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.loader-text {
+  margin-top: 20px;
+  font-family: Articulat CF, system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #7A5E3E;
+  letter-spacing: 3px;
+}
+
+body.dark-mode .loader-text {
+  color: #D1B68D;
+}
+
   </style>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -3949,6 +4205,17 @@ body.dark-mode .footer__inner small {
   <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"> </script>
  </head>
  <body class="notes">
+
+  <!-- Page Loading Animation -->
+  <div class="page-loader">
+    <div class="loader-content">
+      <img src="./img/s.svg" alt="" class="loader-logo">
+      <div class="loader-text">LOADING</div>
+    </div>
+  </div>
+
+  <!-- Page Transition Overlay -->
+  <div class="page-transition-overlay"></div>
 
   <nav aria-label="Global" class="navigation" role="navigation">
    <a class="navigation__link" href="./index.html">
@@ -3967,6 +4234,11 @@ body.dark-mode .footer__inner small {
     <li class="navigation__list__item">
      <a class="navigation__list__link" href="notes.html">
       Notes
+     </a>
+    </li>
+    <li class="navigation__list__item">
+     <a class="navigation__list__link" href="projects.html">
+      Projects
      </a>
     </li>
     <label class="toggle-label">
@@ -3991,11 +4263,11 @@ body.dark-mode .footer__inner small {
   </div>
   <main class="content" data-template="notes" id="content">
    <section class="notes--intro">
-    <h1>
-     Notes
+    <h1 id="typewriter-text">
+     
     </h1>
-    
-    
+
+
     <p>
     A collection of notes on books, articles, and other resources that I have found useful.
     </p>
@@ -4043,7 +4315,7 @@ body.dark-mode .footer__inner small {
   <footer aria-label="Footer">
    <div class="footer__inner">
     <small>
-     © 2023 Salmaan Nusrath
+     © 2026 Salmaan Nusrath
     </small>
     <ul class="footer__social">
      <li>
@@ -4068,5 +4340,94 @@ body.dark-mode .footer__inner small {
  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js">
  </script>
  <script src="./script.js">
+ </script>
+ <script>
+  // ========== PAGE LOADING ANIMATION ==========
+  const pageLoader = document.querySelector('.page-loader');
+  
+  // Check if this is coming from a page transition (navigation)
+  const isPageTransition = sessionStorage.getItem('pageTransitioning') === 'true';
+  
+  // Check if this is a fresh page load (not navigation)
+  const isReload = performance.navigation ? performance.navigation.type === 1 : 
+                   performance.getEntriesByType('navigation')[0]?.type === 'reload';
+  const isFirstVisit = !sessionStorage.getItem('hasVisitedSite');
+  
+  // Only show loader on first visit or reload, NOT on navigation
+  const showLoader = (isFirstVisit || isReload) && !isPageTransition;
+  
+  // Clear the transition flag
+  sessionStorage.removeItem('pageTransitioning');
+  
+  if (!showLoader) {
+    // Navigation between pages - hide loader immediately (no flash)
+    pageLoader.style.display = 'none';
+    pageLoader.classList.add('loaded');
+  } else {
+    // First visit or page refresh - show loading animation
+    sessionStorage.setItem('hasVisitedSite', 'true');
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        pageLoader.classList.add('loaded');
+      }, 1000);
+    });
+    if (document.readyState === 'complete') {
+      setTimeout(function() {
+        pageLoader.classList.add('loaded');
+      }, 1000);
+    }
+  }
+
+  // ========== PAGE TRANSITIONS ==========
+  const transitionOverlay = document.querySelector('.page-transition-overlay');
+  const navLinks = document.querySelectorAll('.navigation__list__link, .navigation__link');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      
+      if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) {
+        return;
+      }
+      
+      const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+      const targetPath = href.split('/').pop() || 'index.html';
+      if (currentPath === targetPath) {
+        return;
+      }
+      
+      e.preventDefault();
+      
+      // Set flag so next page knows it's a transition
+      sessionStorage.setItem('pageTransitioning', 'true');
+      
+      document.body.classList.add('page-transitioning');
+      
+      setTimeout(() => {
+        window.location.href = href;
+      }, 400);
+    });
+  });
+
+  // ========== TYPEWRITER EFFECT ==========
+  const typewriterText = document.getElementById('typewriter-text');
+  if (typewriterText) {
+    const text = "Notes";
+    let index = 0;
+    
+    function typeWriter() {
+      if (index < text.length) {
+        typewriterText.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 100);
+      }
+    }
+    
+    // Start typing - delay based on whether loader was shown
+    const loaderDelay = showLoader ? 1800 : 300;
+    setTimeout(() => {
+      typeWriter();
+    }, loaderDelay);
+  }
  </script>
 </html> 

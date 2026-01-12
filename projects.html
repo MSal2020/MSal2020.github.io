@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta name="theme-color" content="#e7672e">
+
+  <title>
+   Sal | Projects
+  </title>
+  <meta content="Personal projects by Salmaan" name="description"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="website" property="og:type"/>
+  <meta content="Salmaan | Projects" property="og:title"/>
+  <meta content="Personal projects by Salmaan" property="og:description"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Salmaan | Projects" name="twitter:title"/>
+  <meta content="Personal projects by Salmaan" name="twitter:description"/>
+  
+  <!-- Prevent FOUC (Flash of Unstyled Content) for dark mode and page transitions -->
+  <script>
+    (function() {
+      // Apply dark mode immediately to prevent flash
+      var theme = localStorage.getItem('theme');
+      if (!theme) {
+        var oldDarkMode = localStorage.getItem('darkMode');
+        if (oldDarkMode === 'true') theme = 'dark-mode';
+      }
+      if (theme === 'dark-mode') {
+        document.documentElement.classList.add('dark-mode');
+      }
+      
+      // If coming from page transition, inject CSS to hide loader immediately
+      if (sessionStorage.getItem('pageTransitioning') === 'true') {
+        var style = document.createElement('style');
+        style.textContent = '.page-loader { display: none !important; }';
+        document.head.appendChild(style);
+      }
+    })();
+  </script>
+  
+  <style>
+   * {
+    box-sizing: border-box
+}
+
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video {
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    display: block
+}
+
+:root {
+  --bg: #F0DBA5;
+  --text: #151515;
+  --yellow: #EDB74D;
+  --red: #EB6666;
+  --green: #6FB18A;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: linear-gradient(300deg, #F0DBA5, #FFE7C7, #D5B897);
+  background-size: 180% 180%;
+  background-attachment: fixed;
+  min-height: 100%;
+}
+
+body {
+  line-height: 1;
+  background: linear-gradient(300deg, #F0DBA5, #FFE7C7, #D5B897);
+  background-size: 180% 180%;
+  background-attachment: fixed;
+  font-family: "Recoleta", sans-serif;
+  transition: color 0.5s ease;
+  min-height: 100%;
+}
+
+/* Apply dark mode from html element to prevent flash */
+html.dark-mode {
+    background: linear-gradient(300deg, #000000, #1C1C1C, #4A2F1E);
+    background-attachment: fixed;
+}
+
+html.dark-mode body,
+body.dark-mode {
+    background: linear-gradient(300deg, #000000, #1C1C1C, #4A2F1E);
+    background-attachment: fixed;
+}
+
+p, ul, ol {
+    color: #333333;
+    transition: color 0.5s ease;
+}
+
+body.dark-mode p, body.dark-mode ul, body.dark-mode ol {
+    color: #E6E6E6;
+    transition: color 0.5s ease;
+}
+
+h1 {
+    color: #7A5E3E;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    transition: color 0.5s ease;
+}
+
+h2 {
+    color: #7A5E3E;
+    font-weight: 700;
+    letter-spacing: 2px;
+    transition: color 0.5s ease;
+}
+
+h3 {
+    color: #7A5E3E;
+    font-weight: 700;
+    transition: color 0.5s ease;
+}
+
+h4 {
+    color: #7A5E3E;
+    font-weight: 600;
+    transition: color 0.5s ease;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+    color: #D1B68D;
+    transition: color 0.5s ease;
+}
+
+body.dark-mode .blob {
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+    transition: color 0.5s ease;
+}
+
+.mode-toggle {
+  margin-left: auto;
+}
+
+.toggle-label {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle-label input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
+.slider:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .slider {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+body.dark-mode .slider:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider:active:before {
+  transform: scale(0.95);
+}
+
+.light-icon,
+.dark-icon {
+  width: 20px;
+  height: 20px;
+  transition: opacity 0.4s;
+}
+
+.light-icon {
+  opacity: 1;
+  margin-left: auto;
+}
+
+.dark-icon {
+  opacity: 1;
+  margin-right: auto;
+}
+
+.blob-cont {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+}
+
+ol,ul {
+    list-style: none
+}
+
+blockquote,q {
+    quotes: none
+}
+
+blockquote:after,blockquote:before,q:after,q:before {
+    content: "";
+    content: none
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+@font-face {
+    font-display: swap;
+    font-family: Articulat CF;
+    font-style: normal;
+    font-weight: 400;
+    src: url(52ce32a338a3057de64c3528a8571a7f.woff2) format("woff2"),url(8b7f6754d12df7ff7d2f1aa77f9ee60d.woff) format("woff")
+}
+
+@font-face {
+    font-display: swap;
+    font-family: Articulat CF;
+    font-style: normal;
+    font-weight: 500;
+    src: url(dae5654a2e5ffdaf0057259047ba7834.woff2) format("woff2"),url(6a6f588a09b12435164b3000ddef9492.woff) format("woff")
+}
+
+@font-face {
+    font-display: swap;
+    font-family: Articulat CF;
+    font-style: normal;
+    font-weight: 600;
+    src: url(ac1dbc3a2cc16a39ee69152e60e7d608.woff2) format("woff2"),url(3807be14386a6352ed314e8c6834b2c3.woff) format("woff")
+}
+
+@font-face {
+    font-display: swap;
+    font-family: Articulat CF;
+    font-style: normal;
+    font-weight: 700;
+    src: url(4c25ad540087c6c91e1a512489228e10.woff2) format("woff2"),url(c47c98b0c378fb434f6a083c2fc54ca7.woff) format("woff")
+}
+
+.dimensions--copy,.error main,.navigation,.projects main,footer .footer__inner {
+    margin: 0 auto;
+    max-width: 1532px;
+    padding: 0 84px
+}
+
+@media(max-width: 799px) {
+    .dimensions--copy,.error main,.navigation,.projects main,footer .footer__inner {
+        padding:0 20px
+    }
+}
+
+.navigation {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    left: 50%;
+    position: absolute;
+    top: 84px;
+    transform: translateX(-50%);
+    width: 100%;
+    z-index: 2
+}
+
+@media(max-width: 799px) {
+    .navigation {
+        top:20px
+    }
+}
+
+.navigation:before {
+    background-color: #7A5E3E;
+    content: "";
+    display: block;
+    height: 1px;
+    order: 2;
+    width: 100%;
+    transition: color 0.5s ease;
+}
+
+body.dark-mode .navigation::before {
+  background-color: #D1B68D;
+  transition: color 0.5s ease;
+}
+
+@media(max-width: 799px) {
+    .navigation:before {
+        display:none
+    }
+}
+
+.error .navigation:before,.projects .navigation:before {
+    background-color: gray
+}
+
+.navigation__link {
+    border-radius: 20px;
+    flex-shrink: 0;
+    font-size: 0;
+    height: 56px;
+    margin-right: 64px;
+    order: 1;
+    width: 91px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: inline-block;
+}
+
+.navigation__link:hover {
+    transform: scale(1.05) rotate(3deg);
+}
+
+.navigation__link img {
+    transition: filter 0.3s ease;
+}
+
+.navigation__link:hover img {
+    filter: brightness(1.1) drop-shadow(0 4px 8px rgba(237, 183, 77, 0.3));
+}
+
+@media(max-width: 799px) {
+    .navigation__link {
+        border-radius:16px;
+        height: 44px;
+        margin-right: 32px;
+        width: 72px
+    }
+}
+
+body.dark-mode .navigation__list__link {
+  color: #D1B68D;
+  transition: color 0.5s ease;
+}
+
+.navigation__link:focus {
+    box-shadow: 0 0 0 4px #000,0 0 0 8px #fff;
+    outline: none
+}
+
+.error .navigation__link svg g,.projects .navigation__link svg g {
+    fill: #000
+}
+
+.error .navigation__link:focus,.projects .navigation__link:focus {
+    box-shadow: 0 0 0 4px #f9f9f9,0 0 0 8px #000;
+    outline: none
+}
+
+.navigation__button {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: none;
+    font-size: 0;
+    height: 44px;
+    margin-left: auto;
+    order: 3;
+    padding: 0;
+    position: relative;
+    width: 44px
+}
+
+@media(max-width: 799px) {
+    .navigation__button {
+        display:none
+    }
+    .js .navigation__button {
+        display: block
+    }
+}
+
+.navigation__list {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  margin-left: 64px;
+  order: 3;
+}
+
+@media(max-width: 799px) {
+    .navigation__list {
+        flex-direction:column;
+        margin-left: 0;
+        pointer-events: auto;
+        position: absolute;
+        right: 20px;
+        top: 0;
+        visibility: visible
+    }
+    .js .navigation__list {
+        pointer-events: none;
+        top: 44px;
+        transition: visibility 0ms linear .4s;
+        visibility: hidden
+    }
+}
+
+.navigation__list__item {
+    margin-left: 8px;
+    margin-right: 8px
+}
+
+@media(max-width: 799px) {
+    .navigation__list__item {
+        margin:0;
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+.navigation__list__item:first-child {
+    margin-left: 0
+}
+
+.navigation__list__item:last-child {
+    margin-right: 0
+}
+
+.navigation__list__link {
+    border-radius: 12px;
+    color: #7A5E3E;
+    display: inline-block;
+    font-family: Articulat CF,system-ui,sans-serif;
+    padding: 14px 24px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    font-weight: 500;
+}
+
+.navigation__list__link:focus,
+.navigation__list__link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+body.dark-mode .navigation__list__link:focus,
+body.dark-mode .navigation__list__link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.error .navigation__list__link,.projects .navigation__list__link {
+    background-color: rgba(36,36,36,0);
+    color: #7A5E3E;
+}
+
+.error .navigation__list__link:focus,.error .navigation__list__link:hover,.projects .navigation__list__link:focus,.projects .navigation__list__link:hover {
+    background-color: rgba(36,36,36,.1)
+}
+
+/* ========== MAIN CONTENT ========== */
+.projects main {
+    display: flex;
+    flex-direction: column;
+    font-family: Articulat CF,system-ui,sans-serif;
+    margin-bottom: 192px;
+    margin-top: 240px
+}
+
+@media(max-width: 799px) {
+    .projects main {
+        margin-bottom:84px;
+        margin-top: 108px;
+        padding-left: 20px;
+        padding-right: 20px
+    }
+}
+
+/* ========== INTRO SECTION ========== */
+.projects--intro {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.projects--intro h1 {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -.5px;
+    margin-bottom: 16px
+}
+
+#typewriter-text::after {
+    content: '|';
+    animation: blink 1s infinite;
+    color: #7A5E3E;
+}
+
+body.dark-mode #typewriter-text::after {
+    color: #D1B68D;
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+@media(max-width: 799px) {
+    .projects--intro h1 {
+        font-size:36px;
+        margin-bottom: 8px
+    }
+}
+
+.projects--intro p {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 48px;
+    margin-top: 24px;
+    max-width: 800px
+}
+
+@media(max-width: 799px) {
+    .projects--intro p {
+        font-size:18px
+    }
+}
+
+/* ========== GITHUB SECTION ========== */
+.projects--github {
+    margin-bottom: 64px;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.projects--github h2 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 24px;
+    text-transform: uppercase
+}
+
+.github-profile {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 28px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 32px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body.dark-mode .github-profile {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.github-profile:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .github-profile:hover {
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+.github-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(122, 94, 62, 0.3);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .github-avatar {
+    border-color: rgba(209, 182, 141, 0.3);
+}
+
+.github-profile:hover .github-avatar {
+    transform: scale(1.05);
+    border-color: rgba(122, 94, 62, 0.6);
+}
+
+body.dark-mode .github-profile:hover .github-avatar {
+    border-color: rgba(209, 182, 141, 0.6);
+}
+
+.github-info {
+    flex: 1;
+}
+
+.github-info h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.github-info p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.github-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.github-stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.github-stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #7A5E3E;
+}
+
+body.dark-mode .github-stat-value {
+    color: #D1B68D;
+}
+
+.github-stat-label {
+    font-size: 14px;
+    opacity: 0.8;
+    color: #333333;
+    transition: color 0.5s ease;
+}
+
+body.dark-mode .github-stat-label {
+    color: #E6E6E6;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #333333;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.github-link:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+body.dark-mode .github-link {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #E6E6E6;
+}
+
+body.dark-mode .github-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.github-link svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* ========== REPOSITORIES GRID ========== */
+.repos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+@media(max-width: 799px) {
+    .repos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.repo-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+body.dark-mode .repo-card {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.repo-card:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .repo-card:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+}
+
+.repo-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.repo-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+body.dark-mode .repo-icon {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.repo-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: #7A5E3E;
+}
+
+body.dark-mode .repo-icon svg {
+    fill: #D1B68D;
+}
+
+.repo-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.repo-card h3 a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.repo-card h3 a:hover {
+    opacity: 0.7;
+}
+
+.repo-description {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.repo-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    border-top: 1px solid rgba(122, 94, 62, 0.15);
+}
+
+body.dark-mode .repo-meta {
+    border-top-color: rgba(209, 182, 141, 0.15);
+}
+
+.repo-language {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333333;
+    transition: color 0.5s ease;
+}
+
+body.dark-mode .repo-language {
+    color: #E6E6E6;
+}
+
+.language-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.language-dot.python { background-color: #3572A5; }
+.language-dot.javascript { background-color: #f1e05a; }
+.language-dot.typescript { background-color: #2b7489; }
+.language-dot.html { background-color: #e34c26; }
+.language-dot.css { background-color: #563d7c; }
+.language-dot.swift { background-color: #FA7343; }
+.language-dot.java { background-color: #b07219; }
+.language-dot.shell { background-color: #89e051; }
+.language-dot.other { background-color: #7A5E3E; }
+
+.repo-stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: #7A5E3E;
+}
+
+body.dark-mode .repo-stat {
+    color: #D1B68D;
+}
+
+.repo-stat svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    opacity: 0.7;
+}
+
+/* ========== PROJECTS SECTION ========== */
+.projects--list {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.projects--list h2 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 24px;
+    text-transform: uppercase
+}
+
+.project-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+body.dark-mode .project-card {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.project-card:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .project-card:hover {
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+.project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.project-title-area h3 {
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.project-subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.project-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.project-tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #7A5E3E;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .project-tag {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #D1B68D;
+}
+
+.project-tag:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .project-tag:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.project-description {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.project-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: #333333;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.project-link:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+body.dark-mode .project-link {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #E6E6E6;
+}
+
+body.dark-mode .project-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.project-link svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+/* ========== FOOTER ========== */
+footer .footer__inner {
+    color: #7A5E3E;
+    display: flex;
+    font-family: Articulat CF,system-ui,sans-serif;
+    font-size: 12px;
+    justify-content: space-between;
+    letter-spacing: 1px;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    position: relative;
+    text-transform: uppercase;
+    width: 100%
+}
+
+@media(max-width: 799px) {
+    footer .footer__inner {
+        padding-left:20px;
+        padding-right: 20px
+    }
+}
+
+footer .footer__inner:before {
+    background-color: #7A5E3E;
+    content: "";
+    display: block;
+    height: 1px;
+    left: 84px;
+    position: absolute;
+    top: 0;
+    width: calc(100% - 168px);
+    transition: color 0.5s ease;
+}
+
+body.dark-mode footer .footer__inner::before {
+    background-color: #D1B68D;
+    transition: color 0.5s ease;
+}
+
+@media(max-width: 799px) {
+    footer .footer__inner:before {
+        left:20px;
+        width: calc(100% - 40px)
+    }
+}
+
+footer .footer__social {
+    align-items: center;
+    display: flex;
+    height: 44px;
+    position: absolute;
+    right: 71px;
+    top: 0;
+    width: 88px
+}
+
+@media(max-width: 799px) {
+    footer .footer__social {
+        right:7px
+    }
+}
+
+footer .footer__social li {
+    height: 100%
+}
+
+footer .footer__social .instagram,footer .footer__social .twitter {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: 18px 18px;
+    height: 24px;
+    opacity: .5;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 24px;
+    will-change: opacity, transform;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+footer .footer__social a:hover .instagram,
+footer .footer__social a:hover .twitter {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.1);
+}
+
+footer .footer__social a {
+    border-radius: 12px;
+    display: inline-block;
+    font-size: 0;
+    line-height: 1;
+    text-decoration: none
+}
+
+body.dark-mode .navigation__link img.star {
+  content: url('/img/s-dark.svg');
+}
+
+body.dark-mode .footer__social .twitter {
+  content: url('img/twitter-dark.svg');
+}
+
+body.dark-mode .footer__social .instagram {
+  content: url('img/instagram-dark.svg');
+}
+
+body.dark-mode .footer__inner small {
+  color: #D1B68D;
+  transition: color 0.5s ease;
+}
+
+/* ========== STICKY NAVIGATION - LIQUID GLASS EFFECT ========== */
+.navigation {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navigation.sticky {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 40px);
+  padding: 16px 32px;
+  border-radius: 20px;
+  z-index: 1000;
+
+  /* Glassmorphism - matching note items */
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.navigation.sticky::after {
+  display: none;
+}
+
+.navigation.sticky::before {
+  display: none;
+}
+
+.navigation.sticky > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Dark mode */
+body.dark-mode .navigation.sticky {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 799px) {
+  .navigation.sticky {
+    top: 10px;
+    max-width: calc(100% - 20px);
+    padding: 12px 20px;
+    border-radius: 16px;
+  }
+}
+
+html.projects {
+    background-color: #f9f9f9
+}
+
+body {
+    background-color: #000;
+    overflow-x: hidden
+}
+
+body.projects {
+    background-color: #f9f9f9
+}
+
+/* Loading state for GitHub data */
+.loading-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    color: #7A5E3E;
+    font-size: 16px;
+}
+
+body.dark-mode .loading-placeholder {
+    color: #D1B68D;
+}
+
+.loading-spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(122, 94, 62, 0.2);
+    border-top-color: #7A5E3E;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 12px;
+}
+
+body.dark-mode .loading-spinner {
+    border-color: rgba(209, 182, 141, 0.2);
+    border-top-color: #D1B68D;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========== PROJECT POPUP ========== */
+body.project-popup-active {
+    overflow: hidden;
+}
+
+.project-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: 5vh;
+    height: 95vh;
+    z-index: 10000;
+    width: 98vw;
+    overflow: hidden;
+    margin-left: 1vw;
+    transform: translateY(1000px);
+    opacity: 0;
+    margin-right: 1vw;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 40px 40px 0px 0px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+body.dark-mode .project-popup {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.popup-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 70px 20px 50px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.popup-content::-webkit-scrollbar {
+    display: none;
+}
+
+.popup-content h1 {
+    font-size: 48px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+@media(max-width: 799px) {
+    .popup-content h1 {
+        font-size: 36px;
+    }
+}
+
+.popup-content h2 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 24px;
+    text-transform: uppercase
+}
+
+.popup-content h3 {
+    font-size: 35px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+@media(max-width: 799px) {
+    .popup-content h3 {
+        font-size: 28px;
+    }
+}
+
+.popup-content h4 {
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    padding: 10px;
+}
+
+@media(max-width: 799px) {
+    .popup-content h4 {
+        font-size: 24px;
+    }
+}
+
+.popup-content p, .popup-content ul, .popup-content ol {
+    font-size: 22px;
+    margin-bottom: 15px;
+    padding: 10px;
+    line-height: 1.6;
+    max-width: 800px;
+    width: 100%;
+}
+
+@media(max-width: 799px) {
+    .popup-content p, .popup-content ul, .popup-content ol {
+        font-size: 18px;
+    }
+}
+
+.popup-content ul, .popup-content ol {
+    margin-bottom: 1em;
+    padding-left: 2.5em;
+}
+
+.popup-content ul {
+    list-style-type: disc;
+}
+
+.popup-content ol {
+    list-style-type: decimal;
+}
+
+.popup-content li {
+    margin-bottom: 8px;
+}
+
+.popup-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+.popup-close ion-icon {
+    filter: invert(.2);
+    font-size: 25px;
+    transition: transform 0.3s ease;
+}
+
+.popup-close:hover ion-icon {
+    transform: scale(1.1);
+}
+
+body.dark-mode .popup-close ion-icon {
+    filter: invert(1);
+}
+
+.popup-text {
+    text-align: left;
+    padding: 20px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.popup-text img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+}
+
+.popup-text strong {
+    font-weight: bold;
+}
+
+.popup-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.popup-tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #7A5E3E;
+}
+
+body.dark-mode .popup-tag {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #D1B68D;
+}
+
+.popup-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+.popup-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: #333333;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.popup-link:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+body.dark-mode .popup-link {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #E6E6E6;
+}
+
+body.dark-mode .popup-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.popup-link svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+/* Make project cards clickable */
+.project-card {
+    cursor: pointer;
+}
+
+.project-card .project-links {
+    display: none;
+}
+
+/* ========== PROJECT FILTERING ========== */
+.filter-wrapper {
+    border-top: 1px solid #7A5E3E;
+    display: flex;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    position: relative;
+    margin-bottom: 24px;
+}
+
+body.dark-mode .filter-wrapper {
+    border-top-color: #D1B68D;
+}
+
+.filter-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-menu {
+    display: inline-flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+}
+
+.filter-menu > li > a {
+    display: block;
+    text-decoration: none;
+    color: #7A5E3E;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 12px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+body.dark-mode .filter-menu > li > a {
+    color: #D1B68D;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.filter-menu > li > a:hover,
+.filter-menu > li > a.active {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+body.dark-mode .filter-menu > li > a:hover,
+body.dark-mode .filter-menu > li > a.active {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.filter-menu > li > a.active {
+    color: #333333;
+    font-weight: 600;
+}
+
+body.dark-mode .filter-menu > li > a.active {
+    color: #F0F0F0;
+}
+
+.project-card.hidden {
+    display: none;
+}
+
+.no-projects-message {
+    text-align: center;
+    padding: 60px 20px;
+    color: #7A5E3E;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+body.dark-mode .no-projects-message {
+    color: #D1B68D;
+}
+
+/* ========== PAGE LOADING ANIMATION ========== */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(300deg, #F0DBA5, #FFE7C7, #D5B897);
+  background-size: 180% 180%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+body.dark-mode .page-loader {
+  background: linear-gradient(300deg, #000000, #1C1C1C, #4A2F1E);
+}
+
+.page-loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ========== PAGE TRANSITIONS ========== */
+.page-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(300deg, #F0DBA5, #FFE7C7, #D5B897);
+  background-size: 180% 180%;
+  z-index: 99998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  pointer-events: none;
+}
+
+html.dark-mode .page-transition-overlay,
+body.dark-mode .page-transition-overlay {
+  background: linear-gradient(300deg, #000000, #1C1C1C, #4A2F1E);
+}
+
+body.page-transitioning .page-transition-overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.loader-content {
+  text-align: center;
+}
+
+.loader-logo {
+  width: 80px;
+  height: 80px;
+  animation: loaderPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loaderPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.loader-text {
+  margin-top: 20px;
+  font-family: Articulat CF, system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #7A5E3E;
+  letter-spacing: 3px;
+}
+
+body.dark-mode .loader-text {
+  color: #D1B68D;
+}
+
+  </style>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+ </head>
+ <body class="projects">
+
+  <!-- Page Loading Animation -->
+  <div class="page-loader">
+    <div class="loader-content">
+      <img src="./img/s.svg" alt="" class="loader-logo">
+      <div class="loader-text">LOADING</div>
+    </div>
+  </div>
+
+  <!-- Page Transition Overlay -->
+  <div class="page-transition-overlay"></div>
+
+  <nav aria-label="Global" class="navigation" role="navigation">
+   <a class="navigation__link" href="./index.html">
+    Salmaan
+    <img alt="" class="star" src="./img/s.svg" height="50px" width="50px"/>
+   </a>
+   <button aria-controls="navigation__list" aria-expanded="false" class="navigation__button">
+    Open Global Menu
+   </button>
+   <ul class="navigation__list" id="navigation__list">
+    <li class="navigation__list__item">
+     <a class="navigation__list__link" href="/#work">
+      Resume
+     </a>
+    </li>
+    <li class="navigation__list__item">
+     <a class="navigation__list__link" href="notes.html">
+      Notes
+     </a>
+    </li>
+    <li class="navigation__list__item">
+     <a class="navigation__list__link" href="projects.html">
+      Projects
+     </a>
+    </li>
+    <label class="toggle-label">
+        <input type="checkbox" id="mode-switch">
+        <span class="slider">
+            <img src="img/dark.svg" alt="Dark Mode" class="dark-icon">
+            <img src="img/light.svg" alt="Light Mode" class="light-icon">
+        </span>
+    </label>
+   </ul>
+  </nav>
+
+  <div class="blob-cont">
+    <div class="blob yellow"></div>
+    <div class="blob green"></div>
+    <div class="blob red"></div>
+  </div>
+
+  <main class="content" data-template="projects" id="content">
+   <section class="projects--intro">
+    <h1 id="typewriter-text"></h1>
+    <p>
+      A showcase of my personal projects, experiments, and open-source contributions. 
+      From automation tools to web applications, here's what I've been building.
+    </p>
+   </section>
+  
+   <section class="projects--github">
+    <h2>GitHub</h2>
+    
+    <div class="github-profile" id="github-profile">
+      <img src="https://github.com/MSal2020.png" alt="GitHub Avatar" class="github-avatar" id="github-avatar">
+      <div class="github-info">
+        <h3 id="github-name">MSal2020</h3>
+        <p id="github-bio">Loading...</p>
+        <div class="github-stats">
+          <div class="github-stat">
+            <span class="github-stat-value" id="github-repos">-</span>
+            <span class="github-stat-label">Repositories</span>
+          </div>
+          <div class="github-stat">
+            <span class="github-stat-value" id="github-followers">-</span>
+            <span class="github-stat-label">Followers</span>
+          </div>
+          <div class="github-stat">
+            <span class="github-stat-value" id="github-following">-</span>
+            <span class="github-stat-label">Following</span>
+          </div>
+        </div>
+      </div>
+      <a href="https://github.com/MSal2020" target="_blank" rel="noopener noreferrer" class="github-link">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+        View Profile
+      </a>
+    </div>
+
+    <div class="repos-grid" id="repos-grid">
+      <div class="loading-placeholder">
+        <div class="loading-spinner"></div>
+        Loading repositories...
+      </div>
+    </div>
+   </section>
+
+   <section class="projects--list">
+    <h2>Featured Projects</h2>
+    
+    <!-- Project Filters -->
+    <nav class="filter-wrapper">
+      <ul class="filter-menu">
+        <li><a href="#" data-filter="all" class="active">All</a></li>
+        <li><a href="#" data-filter="web">Web Development</a></li>
+        <li><a href="#" data-filter="automation">Automation</a></li>
+        <li><a href="#" data-filter="design">Design</a></li>
+        <li><a href="#" data-filter="mobile">Mobile</a></li>
+      </ul>
+    </nav>
+
+    <div class="projects-container" id="projects-container">
+    
+    <div class="project-card" data-project="personal-website" data-category="web design" onclick="openProjectPopup('personal-website')">
+      <div class="project-header">
+        <div class="project-title-area">
+          <h3>Personal Website</h3>
+          <p class="project-subtitle">This very website you're viewing</p>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">HTML</span>
+          <span class="project-tag">CSS</span>
+          <span class="project-tag">JavaScript</span>
+          <span class="project-tag">GSAP</span>
+        </div>
+      </div>
+      <p class="project-description">
+        A modern, glassmorphism-styled personal portfolio website featuring smooth animations, 
+        dark mode support, and responsive design. Built with vanilla HTML, CSS, and JavaScript, 
+        enhanced with GSAP for scroll-triggered animations.
+      </p>
+    </div>
+
+    <!-- Add more project cards here with data-category attribute -->
+    
+    </div><!-- End projects-container -->
+    
+    <div class="no-projects-message" id="no-projects-message" style="display: none;">
+      No projects found in this category.
+    </div>
+   </section>
+
+   <!-- Project Popup -->
+   <div class="project-popup" id="project-popup">
+     <div class="popup-close" onclick="closeProjectPopup()">
+       <ion-icon name="close-outline"></ion-icon>
+     </div>
+     <div class="popup-content">
+       <h1 id="popup-title"></h1>
+       <h2 id="popup-subtitle"></h2>
+       <div class="popup-tags" id="popup-tags"></div>
+       <div class="popup-text" id="popup-text"></div>
+       <div class="popup-links" id="popup-links"></div>
+     </div>
+   </div>
+  </main>
+
+  <footer aria-label="Footer">
+   <div class="footer__inner">
+    <small>
+     © 2026 Salmaan Nusrath
+    </small>
+    <ul class="footer__social">
+     <li>
+      <a class="social-icon" href="https://twitter.com/msaln03" rel="noopener noreferrer" target="_blank">
+       <img class="twitter" src="img/twitter.svg"/>
+       Twitter
+      </a>
+     </li>
+     <li>
+      <a class="social-icon" href="https://www.instagram.com/msaln03" rel="noopener noreferrer" target="_blank">
+       <img class="instagram" src="img/instagram.svg"/>
+       Instagram
+      </a>
+     </li>
+    </ul>
+   </div>
+  </footer>
+  
+ </body>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+ <script>
+// ========== DARK MODE TOGGLE ==========
+const modeSwitch = document.getElementById('mode-switch');
+const body = document.body;
+const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+
+// Check for saved preference - use same key as other pages
+// Also migrate old 'darkMode' key to 'theme' for consistency
+let currentTheme = localStorage.getItem('theme');
+if (!currentTheme) {
+  // Check for old key format and migrate
+  const oldDarkMode = localStorage.getItem('darkMode');
+  if (oldDarkMode === 'true') {
+    currentTheme = 'dark-mode';
+    localStorage.setItem('theme', 'dark-mode');
+    localStorage.removeItem('darkMode'); // Clean up old key
+  } else if (oldDarkMode === 'false') {
+    currentTheme = 'light-mode';
+    localStorage.setItem('theme', 'light-mode');
+    localStorage.removeItem('darkMode'); // Clean up old key
+  }
+}
+
+if (currentTheme) {
+  // Sync both html and body for consistency
+  document.documentElement.classList.add(currentTheme);
+  body.classList.add(currentTheme);
+  if (currentTheme === 'dark-mode') {
+    modeSwitch.checked = true;
+    if (metaThemeColor) metaThemeColor.setAttribute('content', '#8B4513');
+  } else {
+    if (metaThemeColor) metaThemeColor.setAttribute('content', '#e7672e');
+  }
+}
+
+modeSwitch.addEventListener('change', (e) => {
+  if (e.target.checked) {
+    document.documentElement.classList.add('dark-mode');
+    body.classList.add('dark-mode');
+    localStorage.setItem('theme', 'dark-mode');
+    if (metaThemeColor) metaThemeColor.setAttribute('content', '#8B4513');
+  } else {
+    document.documentElement.classList.remove('dark-mode');
+    body.classList.remove('dark-mode');
+    localStorage.setItem('theme', 'light-mode');
+    if (metaThemeColor) metaThemeColor.setAttribute('content', '#e7672e');
+  }
+});
+
+// ========== PAGE LOADING ANIMATION ==========
+const pageLoader = document.querySelector('.page-loader');
+
+// Check if this is coming from a page transition (navigation)
+const isPageTransition = sessionStorage.getItem('pageTransitioning') === 'true';
+
+// Check if this is a fresh page load (not navigation)
+const isReload = performance.navigation ? performance.navigation.type === 1 : 
+                 performance.getEntriesByType('navigation')[0]?.type === 'reload';
+const isFirstVisit = !sessionStorage.getItem('hasVisitedSite');
+
+// Only show loader on first visit or reload, NOT on navigation
+const showLoader = (isFirstVisit || isReload) && !isPageTransition;
+
+// Clear the transition flag
+sessionStorage.removeItem('pageTransitioning');
+
+if (!showLoader) {
+  // Navigation between pages - hide loader immediately (no flash)
+  pageLoader.style.display = 'none';
+  pageLoader.classList.add('loaded');
+} else {
+  // First visit or page refresh - show loading animation
+  sessionStorage.setItem('hasVisitedSite', 'true');
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      pageLoader.classList.add('loaded');
+    }, 1000);
+  });
+  if (document.readyState === 'complete') {
+    setTimeout(function() {
+      pageLoader.classList.add('loaded');
+    }, 1000);
+  }
+}
+
+// ========== PAGE TRANSITIONS ==========
+const transitionOverlay = document.querySelector('.page-transition-overlay');
+const navLinks = document.querySelectorAll('.navigation__list__link, .navigation__link');
+
+navLinks.forEach(link => {
+  link.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    
+    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) {
+      return;
+    }
+    
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const targetPath = href.split('/').pop() || 'index.html';
+    if (currentPath === targetPath) {
+      return;
+    }
+    
+    e.preventDefault();
+    
+    // Set flag so next page knows it's a transition
+    sessionStorage.setItem('pageTransitioning', 'true');
+    
+    document.body.classList.add('page-transitioning');
+    
+    setTimeout(() => {
+      window.location.href = href;
+    }, 400);
+  });
+});
+
+// ========== TYPEWRITER EFFECT ==========
+const typewriterText = document.getElementById('typewriter-text');
+if (typewriterText) {
+  const text = "Projects";
+  let index = 0;
+  
+  function typeWriter() {
+    if (index < text.length) {
+      typewriterText.textContent += text.charAt(index);
+      index++;
+      setTimeout(typeWriter, 100);
+    }
+  }
+  
+  // Start typing - delay based on whether loader was shown
+  const loaderDelay = showLoader ? 1800 : 300;
+  setTimeout(() => {
+    typeWriter();
+  }, loaderDelay);
+}
+
+// ========== STICKY NAVIGATION ==========
+const navigation = document.querySelector('.navigation');
+if (navigation) {
+  const navOffsetTop = navigation.offsetTop + 100;
+  
+  function handleStickyNav() {
+    if (window.scrollY > navOffsetTop) {
+      navigation.classList.add('sticky');
+    } else {
+      navigation.classList.remove('sticky');
+    }
+  }
+
+  let ticking = false;
+  
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        handleStickyNav();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Initial call
+  handleStickyNav();
+}
+
+// ========== GITHUB API INTEGRATION ==========
+const GITHUB_USERNAME = 'MSal2020';
+
+async function fetchGitHubData() {
+  try {
+    // Fetch user profile
+    const userResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+    const userData = await userResponse.json();
+    
+    // Update profile section
+    document.getElementById('github-avatar').src = userData.avatar_url;
+    document.getElementById('github-name').textContent = userData.name || userData.login;
+    document.getElementById('github-bio').textContent = userData.bio || 'Software Developer & Tech Enthusiast';
+    document.getElementById('github-repos').textContent = userData.public_repos;
+    document.getElementById('github-followers').textContent = userData.followers;
+    document.getElementById('github-following').textContent = userData.following;
+    
+    // Fetch repositories
+    const reposResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`);
+    const reposData = await reposResponse.json();
+    
+    renderRepositories(reposData);
+  } catch (error) {
+    console.error('Error fetching GitHub data:', error);
+    document.getElementById('repos-grid').innerHTML = `
+      <div class="loading-placeholder">
+        Unable to load repositories. Please try again later.
+      </div>
+    `;
+  }
+}
+
+function renderRepositories(repos) {
+  const grid = document.getElementById('repos-grid');
+  
+  if (repos.length === 0) {
+    grid.innerHTML = '<div class="loading-placeholder">No public repositories found.</div>';
+    return;
+  }
+  
+  grid.innerHTML = repos.map(repo => `
+    <div class="repo-card">
+      <div class="repo-header">
+        <div class="repo-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </div>
+      </div>
+      <h3><a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h3>
+      <p class="repo-description">${repo.description || 'No description available.'}</p>
+      <div class="repo-meta">
+        ${repo.language ? `
+          <div class="repo-language">
+            <span class="language-dot ${repo.language.toLowerCase()}"></span>
+            ${repo.language}
+          </div>
+        ` : ''}
+        <div class="repo-stat">
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          ${repo.stargazers_count}
+        </div>
+        <div class="repo-stat">
+          <svg viewBox="0 0 24 24"><path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/></svg>
+          ${repo.forks_count}
+        </div>
+      </div>
+    </div>
+  `).join('');
+  
+  // Animate repo cards after they're added to DOM
+  animateRepoCards();
+}
+
+// ========== GSAP ANIMATIONS ==========
+gsap.registerPlugin(ScrollTrigger);
+
+// Initial page load animations
+window.addEventListener('load', () => {
+  // Intro section
+  gsap.to('.projects--intro', {
+    opacity: 1,
+    y: 0,
+    duration: 0.8,
+    ease: 'power2.out',
+    delay: 0.3
+  });
+  
+  // GitHub section
+  gsap.to('.projects--github', {
+    opacity: 1,
+    y: 0,
+    duration: 0.8,
+    ease: 'power2.out',
+    delay: 0.5
+  });
+  
+  // Projects list section
+  gsap.to('.projects--list', {
+    opacity: 1,
+    y: 0,
+    duration: 0.8,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.projects--list',
+      start: 'top 85%',
+      toggleActions: 'play none none none'
+    }
+  });
+  
+  // Project cards
+  gsap.utils.toArray('.project-card').forEach((card, index) => {
+    gsap.to(card, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out',
+      delay: index * 0.15,
+      scrollTrigger: {
+        trigger: card,
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      }
+    });
+  });
+});
+
+function animateRepoCards() {
+  gsap.utils.toArray('.repo-card').forEach((card, index) => {
+    gsap.to(card, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out',
+      delay: index * 0.1
+    });
+  });
+}
+
+// Fetch GitHub data on page load
+fetchGitHubData();
+
+// ========== PROJECT POPUP ==========
+const projectsData = {
+  'personal-website': {
+    title: 'Personal Website',
+    subtitle: 'Web Development',
+    tags: ['HTML', 'CSS', 'JavaScript', 'GSAP', 'Glassmorphism'],
+    content: `
+      <h3>Overview</h3>
+      <p>
+        This personal portfolio website showcases my work, skills, and journey as a developer. 
+        Built entirely from scratch without frameworks, it demonstrates my proficiency in 
+        front-end development and attention to design details.
+      </p>
+
+      <h3>Design Philosophy</h3>
+      <p>
+        The design draws inspiration from Apple's "Liquid Glass" aesthetic, featuring:
+      </p>
+      <ul>
+        <li><strong>Glassmorphism</strong> — Frosted glass effects using backdrop-filter blur and transparency</li>
+        <li><strong>Warm Color Palette</strong> — Earth tones (#7A5E3E, #D1B68D) for a professional yet approachable feel</li>
+        <li><strong>Smooth Animations</strong> — GSAP-powered scroll-triggered animations for a premium experience</li>
+        <li><strong>Dark Mode</strong> — Full dark theme support with seamless transitions</li>
+      </ul>
+
+      <h3>Technical Highlights</h3>
+      <p>
+        Key technical features implemented:
+      </p>
+      <ul>
+        <li><strong>Vanilla JavaScript</strong> — No frameworks, keeping the bundle size minimal</li>
+        <li><strong>GSAP ScrollTrigger</strong> — Scroll-based animations that feel natural and performant</li>
+        <li><strong>CSS Custom Properties</strong> — Consistent theming using CSS variables</li>
+        <li><strong>Responsive Design</strong> — Mobile-first approach with fluid typography</li>
+        <li><strong>GitHub API Integration</strong> — Dynamic fetching of repository data</li>
+        <li><strong>localStorage</strong> — Persisting user preferences like dark mode</li>
+      </ul>
+
+      <h3>Key Features</h3>
+      <ul>
+        <li>Animated sticky navigation with glassmorphism effect</li>
+        <li>Typewriter effect on the homepage intro</li>
+        <li>Interactive skills section with hierarchical organization</li>
+        <li>Note-style popup system for detailed content viewing</li>
+        <li>Smooth page transitions and micro-interactions</li>
+        <li>SEO-optimized with proper meta tags</li>
+      </ul>
+
+      <h3>Lessons Learned</h3>
+      <p>
+        Building this site reinforced the importance of:
+      </p>
+      <ul>
+        <li>Starting with a clear design system before coding</li>
+        <li>Testing animations across different devices and browsers</li>
+        <li>Balancing aesthetic appeal with performance</li>
+        <li>Iterating based on feedback to refine the user experience</li>
+      </ul>
+
+      <h3>Future Plans</h3>
+      <p>
+        Planned enhancements include adding more interactive project showcases, 
+        implementing a blog section, and exploring WebGL for background effects.
+      </p>
+    `,
+    links: [
+      { label: 'View Source', url: 'https://github.com/MSal2020/MSal2020.github.io', icon: 'github' },
+      { label: 'Live Site', url: './', icon: 'globe' }
+    ]
+  }
+  // Add more projects here
+};
+
+const githubIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>`;
+const globeIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>`;
+
+function openProjectPopup(projectId) {
+  const project = projectsData[projectId];
+  if (!project) return;
+
+  const popup = document.getElementById('project-popup');
+  
+  // Populate content
+  document.getElementById('popup-title').textContent = project.title;
+  document.getElementById('popup-subtitle').textContent = project.subtitle;
+  
+  // Tags
+  const tagsContainer = document.getElementById('popup-tags');
+  tagsContainer.innerHTML = project.tags.map(tag => 
+    `<span class="popup-tag">${tag}</span>`
+  ).join('');
+  
+  // Content
+  document.getElementById('popup-text').innerHTML = project.content;
+  
+  // Links
+  const linksContainer = document.getElementById('popup-links');
+  linksContainer.innerHTML = project.links.map(link => {
+    const icon = link.icon === 'github' ? githubIcon : globeIcon;
+    return `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="popup-link">${icon}${link.label}</a>`;
+  }).join('');
+
+  // Show popup with animation
+  document.body.classList.add('project-popup-active');
+  gsap.to(popup, {
+    y: 0,
+    opacity: 1,
+    duration: 0.5,
+    ease: 'power3.out'
+  });
+}
+
+function closeProjectPopup() {
+  const popup = document.getElementById('project-popup');
+  
+  gsap.to(popup, {
+    y: 1000,
+    opacity: 0,
+    duration: 0.4,
+    ease: 'power3.in',
+    onComplete: () => {
+      document.body.classList.remove('project-popup-active');
+    }
+  });
+}
+
+// Close popup on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.body.classList.contains('project-popup-active')) {
+    closeProjectPopup();
+  }
+});
+
+// Close popup when clicking outside
+document.getElementById('project-popup').addEventListener('click', (e) => {
+  if (e.target.classList.contains('project-popup')) {
+    closeProjectPopup();
+  }
+});
+
+// ========== PROJECT FILTERING ==========
+const filterLinks = document.querySelectorAll('.filter-menu a');
+const projectCards = document.querySelectorAll('.project-card');
+const noProjectsMessage = document.getElementById('no-projects-message');
+
+filterLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    // Update active state
+    filterLinks.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    
+    const filter = link.dataset.filter;
+    let visibleCount = 0;
+    
+    projectCards.forEach(card => {
+      const categories = card.dataset.category.toLowerCase().split(' ');
+      
+      if (filter === 'all' || categories.includes(filter)) {
+        card.classList.remove('hidden');
+        visibleCount++;
+        // Animate card appearance
+        gsap.fromTo(card, 
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+        );
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    
+    // Show/hide no projects message
+    if (visibleCount === 0) {
+      noProjectsMessage.style.display = 'block';
+    } else {
+      noProjectsMessage.style.display = 'none';
+    }
+  });
+});
+ </script>
+</html>
