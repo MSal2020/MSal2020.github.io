@@ -2012,6 +2012,7 @@ body.dark-mode .loader-text {
         <li><a href="#" data-filter="automation">Automation</a></li>
         <li><a href="#" data-filter="design">Design</a></li>
         <li><a href="#" data-filter="mobile">Mobile</a></li>
+        <li><a href="#" data-filter="security">Security</a></li>
       </ul>
     </nav>
 
@@ -2037,8 +2038,28 @@ body.dark-mode .loader-text {
       </p>
     </div>
 
+    <div class="project-card" data-project="llm-red-team" data-category="security" onclick="openProjectPopup('llm-red-team')">
+      <div class="project-header">
+        <div class="project-title-area">
+          <h3>LLM Red Team & Defense Framework</h3>
+          <p class="project-subtitle">Adversarial security research on AI applications</p>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Claude API</span>
+          <span class="project-tag">OWASP</span>
+          <span class="project-tag">ChromaDB</span>
+        </div>
+      </div>
+      <p class="project-description">
+        Built a deliberately vulnerable LLM customer support agent, red-teamed it with 48 attack payloads
+        across 5 OWASP categories, and benchmarked 5 layered defenses from regex filters to architectural
+        privilege separation. Cross-model comparison of Claude Sonnet 4.6 vs Haiku 4.5 with LLM-as-judge scoring.
+      </p>
+    </div>
+
     <!-- Add more project cards here with data-category attribute -->
-    
+
     </div><!-- End projects-container -->
     
     <div class="no-projects-message" id="no-projects-message" style="display: none;">
@@ -2463,8 +2484,107 @@ const projectsData = {
       { label: 'View Source', url: 'https://github.com/MSal2020/MSal2020.github.io', icon: 'github' },
       { label: 'Live Site', url: './', icon: 'globe' }
     ]
+  },
+  'llm-red-team': {
+    title: 'LLM Red Team & Defense Framework',
+    subtitle: 'AI Security Research',
+    tags: ['Python', 'Anthropic Claude API', 'OWASP LLM Top 10', 'ChromaDB', 'RAG', 'Prompt Injection'],
+    content: `
+      <h3>Overview</h3>
+      <p>
+        A systematic security evaluation of LLM-powered applications. I built a deliberately vulnerable
+        AI customer support agent with three attack surfaces, then red-teamed it with 48 attack payloads
+        across 5 OWASP LLM categories, and benchmarked 5 layered defense mechanisms.
+      </p>
+
+      <h3>Key Finding</h3>
+      <p>
+        <strong>Tool manipulation bypasses all text-based defenses.</strong> A mass refund attack scored
+        <em>high severity</em> on Claude Sonnet 4.6 &mdash; the agent processed unauthorized refunds on
+        multiple orders. Input filters, canary tokens, and the LLM output judge all missed it because they
+        only inspect text, not tool calls. Only the architectural privilege separation defense blocked it.
+      </p>
+
+      <h3>Attack Surface</h3>
+      <ul>
+        <li><strong>System Prompt</strong> &mdash; Secrets embedded directly in context (API keys, override codes, credentials)</li>
+        <li><strong>RAG Knowledge Base</strong> &mdash; 4 poisoned documents with hidden injection payloads in ChromaDB</li>
+        <li><strong>Tool Calling</strong> &mdash; Refund processing, order lookup, and escalation with no server-side authorization</li>
+      </ul>
+
+      <h3>Attack Categories (24 attacks, 48 payloads)</h3>
+      <ul>
+        <li><strong>System Prompt Extraction (LLM07)</strong> &mdash; Direct requests, role-play, encoding tricks, completion attacks, output format manipulation</li>
+        <li><strong>Direct Prompt Injection (LLM01)</strong> &mdash; DAN jailbreaks, instruction overrides, payload splitting, authority impersonation</li>
+        <li><strong>Indirect Injection via RAG (LLM01)</strong> &mdash; Poisoned KB documents triggering policy overrides, data exfiltration, tool abuse</li>
+        <li><strong>Tool Manipulation (LLM06)</strong> &mdash; Unauthorized refunds, mass refund processing, social engineering, parameter injection</li>
+        <li><strong>Goal Hijacking (LLM01)</strong> &mdash; Task redirection, subtle drift via multi-turn, persona hijacking</li>
+      </ul>
+
+      <h3>Defense Layers</h3>
+      <ul>
+        <li><strong>Input Filter</strong> &mdash; Regex-based pre-processing that blocked 16.7% of payloads (DAN, role-play, extraction patterns)</li>
+        <li><strong>Canary Token</strong> &mdash; Hidden marker planted in system prompt to detect full prompt leaks</li>
+        <li><strong>Output Judge</strong> &mdash; Secondary LLM (Haiku) evaluates every response for safety before delivery</li>
+        <li><strong>Prompt Armor</strong> &mdash; Hardened system prompts with instruction hierarchy</li>
+        <li><strong>Privilege Separation</strong> &mdash; Architectural split: Responder (no tools) &rarr; Validator (policy enforcement) &rarr; Executor (tools, never sees user input)</li>
+      </ul>
+
+      <h3>Benchmark Results</h3>
+      <table style="width:100%; border-collapse:collapse; margin:1em 0; font-size:0.9em;">
+        <thead>
+          <tr style="border-bottom:2px solid currentColor; text-align:left;">
+            <th style="padding:8px;">Config</th>
+            <th style="padding:8px;">Model</th>
+            <th style="padding:8px;">High</th>
+            <th style="padding:8px;">Low</th>
+            <th style="padding:8px;">Blocked</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(128,128,128,0.3);">
+            <td style="padding:8px;">Baseline</td><td>Haiku 4.5</td><td>0</td><td>4</td><td>0</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(128,128,128,0.3);">
+            <td style="padding:8px;">All Text Defenses</td><td>Haiku 4.5</td><td>0</td><td>7</td><td>8</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(128,128,128,0.3);">
+            <td style="padding:8px;">Baseline</td><td>Sonnet 4.6</td><td style="color:#e74c3c;font-weight:bold;">1</td><td>2</td><td>0</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(128,128,128,0.3);">
+            <td style="padding:8px;">All Text Defenses</td><td>Sonnet 4.6</td><td>0</td><td>5</td><td>8</td>
+          </tr>
+          <tr>
+            <td style="padding:8px;">Privilege Separation</td><td>Sonnet 4.6</td><td style="color:#2ecc71;font-weight:bold;">0</td><td>2</td><td>0</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Defense Effectiveness Matrix</h3>
+      <img src="img/llm-red-team-heatmap.png" alt="Defense heatmap showing which attacks succeeded (red) or were defended (green) across 5 configurations" style="border-radius:16px; max-width:100%; margin:1em 0;">
+
+      <h3>Severity Distribution</h3>
+      <img src="img/llm-red-team-severity.png" alt="Stacked bar chart showing attack severity distribution across defense configurations" style="border-radius:16px; max-width:100%; margin:1em 0;">
+
+      <h3>Notable Observations</h3>
+      <ul>
+        <li><strong>Sonnet 4.6 detected RAG poisoning</strong> &mdash; It explicitly called out embedded injection instructions as "malicious prompt injection attempts"</li>
+        <li><strong>Model safety masks bad architecture</strong> &mdash; Secrets in the system prompt and poisoned RAG docs never leaked, but only because Claude refused &mdash; not because of good design</li>
+        <li><strong>Nondeterminism matters</strong> &mdash; The mass refund attack succeeded in ~3 of 5 runs, showing security evaluations need multiple trials</li>
+      </ul>
+
+      <h3>Tech Stack</h3>
+      <ul>
+        <li><strong>Models</strong> &mdash; Claude Sonnet 4.6 (target), Claude Haiku 4.5 (judge)</li>
+        <li><strong>RAG</strong> &mdash; ChromaDB with sentence-transformers</li>
+        <li><strong>Scoring</strong> &mdash; Dual: keyword/behavioral matching + LLM-as-judge with severity ratings</li>
+        <li><strong>Visualization</strong> &mdash; matplotlib, seaborn, pandas</li>
+      </ul>
+    `,
+    links: [
+      { label: 'View Source', url: 'https://github.com/MSal2020/llm-red-team', icon: 'github' }
+    ]
   }
-  // Add more projects here
 };
 
 const githubIcon = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>`;
