@@ -188,10 +188,16 @@
 
       ctx.clearRect(0, 0, W, H);
 
-      // Faint concentric rings
-      ctx.strokeStyle = rule + '0.06)';
-      ctx.lineWidth = 1;
+      // Concentric index rings — bumped from 0.06 to a more perceptible
+      // level so they read as deliberate orbits in both themes. Dark mode
+      // gets slightly more alpha since the warm stroke color sits against
+      // a near-black wash and needs the extra lift.
+      ctx.lineWidth = 1.1;
       for (var ri = 1; ri <= 3; ri++){
+        // Outer rings a hair softer than the inner one so the eye tracks
+        // inward to the nodes instead of stopping at the edge.
+        var ringA = dark ? (0.34 - ri * 0.05) : (0.24 - ri * 0.035);
+        ctx.strokeStyle = rule + ringA.toFixed(3) + ')';
         ctx.beginPath();
         ctx.arc(cx, cy, R * (0.3 + ri * 0.22), 0, Math.PI * 2);
         ctx.stroke();
