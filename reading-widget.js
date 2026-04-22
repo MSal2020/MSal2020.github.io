@@ -45,6 +45,24 @@
     '  box-shadow:0 6px 24px rgba(0,0,0,0.35);',
     '}',
     '.reading-widget__head{ display:flex; align-items:center; gap:8px; white-space:nowrap; }',
+    // Close button: only relevant on touch devices (hover devices already
+    // collapse on mouse-out). Hidden by default; shown when expanded on
+    // no-hover devices so the user always has a way out of the panel.
+    '.reading-widget__close{',
+    '  display:none; margin-left:auto;',
+    '  width:22px; height:22px; flex:0 0 auto;',
+    '  padding:0; border:0; border-radius:50%;',
+    '  background:transparent; color:inherit;',
+    '  font:inherit; font-size:16px; line-height:1;',
+    '  cursor:pointer; opacity:.7;',
+    '  transition:opacity .2s ease, background-color .2s ease;',
+    '}',
+    '.reading-widget__close:hover,.reading-widget__close:focus-visible{',
+    '  opacity:1; background:rgba(184,92,60,.14); outline:none;',
+    '}',
+    '@media (hover: none){',
+    '  .reading-widget.is-open .reading-widget__close{ display:inline-flex; align-items:center; justify-content:center; }',
+    '}',
     '.reading-widget__dot{',
     '  width:6px; height:6px; border-radius:50%;',
     '  background:var(--accent,#B85C3C);',
@@ -104,6 +122,7 @@
       '<span class="reading-widget__time" data-rw-time>—:—</span>' +
       '<span class="reading-widget__sep">·</span>' +
       '<span data-rw-loc>…</span>' +
+      '<button type="button" class="reading-widget__close" data-rw-close aria-label="Close">×</button>' +
     '</div>' +
     '<div class="reading-widget__body" data-rw-body></div>';
 
@@ -191,8 +210,16 @@
     // Tick every 30s.
     setInterval(paintTime, 30 * 1000);
 
-    // Mobile: tap-to-toggle (no hover).
+    // Mobile: tap-to-toggle (no hover). The explicit close button lives
+    // inside the widget, so intercept its clicks first and swallow them
+    // before the toggle handler re-opens the panel.
     root.addEventListener('click', function(e){
+      var closeBtn = e.target.closest && e.target.closest('[data-rw-close]');
+      if (closeBtn){
+        e.stopPropagation();
+        root.classList.remove('is-open');
+        return;
+      }
       if (window.matchMedia('(hover: none)').matches){
         root.classList.toggle('is-open');
       }
