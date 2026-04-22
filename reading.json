@@ -1,0 +1,16 @@
+{
+  "timezone": "Asia/Singapore",
+  "location": "Singapore",
+  "coords": "1.29°N · 103.85°E",
+  "reading": {
+    "title": "The Good Life: Lessons from the World's Longest Scientific Study of Happiness",
+    "author": "Marc S. Schulz and Robert J. Waldinger",
+    "url": "https://www.amazon.sg/Good-Life-Lessons-Scientific-Happiness/dp/198216669X"
+  },
+  "paper": {
+    "title": "Sleeper Agents: Training Deceptive LLMs",
+    "authors": "Hubinger et al.",
+    "url": "https://arxiv.org/abs/2401.05566"
+  },
+  "updated": "2026-04-22"
+}
